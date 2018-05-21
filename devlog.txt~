@@ -14,12 +14,4 @@ DEVLOG
 lastF -- yyyy-mm-dd hour
 
 ----------------------------------------------------
-pish_posh -- 2018-05-18 13:12:00
-
-- Fixed our apache2 issue (apparently it was a 
-firewall problem) and added proto0 link 
-
-- Updated site map and database schema to 
-accommodate feedback
-----------------------------------------------------
 
