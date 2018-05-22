@@ -12,7 +12,6 @@ DEVLOG
 
 ----------------------------------------------------
 lastF -- yyyy-mm-dd hour
-
 ----------------------------------------------------
 pish_posh -- 2018-05-18 13:12:00
 
@@ -21,5 +20,11 @@ firewall problem) and added proto0 link
 
 - Updated site map and database schema to 
 accommodate feedback
+----------------------------------------------------
+higginsH -- 2018-05-21 21:06:00
+-Made apache display our personal site
+-renamed paths for our Dir
+-added github account to droplet
+-courtesy jpg of pish
 ----------------------------------------------------
 
