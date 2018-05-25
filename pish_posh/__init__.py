@@ -11,16 +11,25 @@ DIR = path.dirname(__file__)
 
 @app.route('/')
 def root():
-    print "=====================================\nConsole Message\n"
-    print DIR + "\n====================================="
-    return render_template('home.html')
-'''
-    body = "<h2> Posh some Pishes </h2>"
-    body+= "DIR: " + DIR + "<br>"
-    body+= '<img src="' + url_for('static', filename='img/posh.jpg') + '" width="500"</img>'
-    return body
-'''
- 
+    if "username" in session:
+        return redirect(url_for("homepage"))
+
+    return render_template("login.html")
+
+@app.route('/signup', methods-["GET", "POST"])
+def signup():
+    if "username" not in session:
+        return render_template("signup.html")
+    else:
+        flash("you are logged in")
+        return redirect(url_for("homepage"))
+
+
+@app.route('/homepage', methods=["GET","POST"])
+def homepage():
+    if "username" in session:
+        username = session["username"]
+
 if __name__ == '__main__':
     app.debug = True #DANGER DANGER! Set to FALSE before deployment!
     app.run()
