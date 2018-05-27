@@ -1,4 +1,4 @@
-from flask import Flask, url_for,render_template
+from flask import Flask, url_for,render_template, session
 from os import path
 
 
@@ -16,7 +16,7 @@ def root():
 
     return render_template("login.html")
 
-@app.route('/signup', methods-["GET", "POST"])
+@app.route('/signup', methods=["GET", "POST"])
 def signup():
     if "username" not in session:
         return render_template("signup.html")
