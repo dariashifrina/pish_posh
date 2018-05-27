@@ -31,7 +31,7 @@ def auth(username, password):
     db = sqlite3.connect(DB)
     c = db.cursor()
     passs = hashlib.sha256(password).hexdigest()
-    query = 'SELECT password FROM users WHERE username = ? AND password = ?'
+    query = 'SELECT password FROM students WHERE username = ? AND password = ?'
     check = c.execute(query, (username, passs))
     ret = check.fetchone()
     db.close()

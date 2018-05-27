@@ -31,7 +31,7 @@ def homepage():
     if "username" in session:
         username = session["username"]
         return render_template("home.html", username = session["username"])
-    return redirect(urlfor("auth"))
+    return redirect(url_for("auth"))
 
 
 @app.route('/auth', methods=["GET", "POST"])
@@ -43,10 +43,11 @@ def auth():
     try:
         username = request.form['username']
         password = request.form['password']
-        osis = request.form['osis']
-        student_id = request.form['student_id']
+        #osis = request.form['osis']
+        #student_id = request.form['student_id']
 
     except KeyError:
+        print 'test'
         flash("Please fill everything in!")
         return render_template("login.html")
 
@@ -60,7 +61,7 @@ def auth():
     else:
         flash("oops! Login failed...")
         return redirect(url_for('login'))
-    
+
 def min_thres(pswd):
     '''
     Returns whether a password meets minimum threshold:
@@ -105,8 +106,8 @@ def signauth():
     else:
         flash("username exists")
         return render_template("signup.html")
-        
-    
+
+
 if __name__ == '__main__':
     app.secret_key = os.urandom(32)
     app.debug = True #DANGER DANGER! Set to FALSE before deployment!
