@@ -1,10 +1,9 @@
-from flask import Flask, url_for,render_template, session
+from flask import Flask, redirect, url_for,render_template, session, request, flash
+import os
 from os import path
 import sqlite3
-import os
-import db_stuff.py
+import db_stuff
 
-app.secret_key = os.random(32)
 
 app = Flask(__name__)
 
@@ -35,7 +34,7 @@ def homepage():
     return redirect(urlfor("auth"))
 
 
-@app.route('/auth', method=["GET", "POST"])
+@app.route('/auth', methods=["GET", "POST"])
 def auth():
     if "username" in session:
         return redirect(url_for("homepage"))
@@ -67,6 +66,9 @@ def min_thres(pswd):
     Returns whether a password meets minimum threshold:
     It contains a mixture of upper- and lowercase letters, and at least one number
     '''
+    UC_LETTERS = "QWERTYUIOPASDFGHJKLZXCVBNM"
+    LC_LETTERS = UC_LETTERS.lower()
+    NUMBERS = "1234567890"
     U= [1 if x in UC_LETTERS else 0 for x in pswd]
     L= [1 if x in LC_LETTERS else 0 for x in pswd]
     N = [1 if x in NUMBERS else 0 for x in pswd]
@@ -97,7 +99,7 @@ def signauth():
     if not min_thres(password0):
         flash("Password must contain upper- and lowercase letters and at least one number")
         return render_template("signup.html")
-    if db_stuff.add_student(username, password, osis, student_id):
+    if db_stuff.add_student(username, password0, osis, student_id):
         flash("successfully created!")
         return redirect(url_for("homepage"))
     else:
@@ -106,5 +108,6 @@ def signauth():
         
     
 if __name__ == '__main__':
+    app.secret_key = os.urandom(32)
     app.debug = True #DANGER DANGER! Set to FALSE before deployment!
     app.run()

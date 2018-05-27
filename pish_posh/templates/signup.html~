@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+<title>Sign Up</title>
+</head>
+
+<body>
+
+<center>
+<b> Log In </b>
+<form action="/auth" method="POST">
+
+Username:
+<br>
+<input type="text" name="username"> </input>
+<br> <br>
+Password:
+<input type="text" name="password"> </input>
+<br> <br>
+
+</form>

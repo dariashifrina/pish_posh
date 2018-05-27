@@ -1,4 +1,5 @@
 import sqlite3
+import hashlib
 
 DB = "pish.db"
 
@@ -11,10 +12,11 @@ def user_tables():
     db.close()
 
 def add_student(username, password, osis, student_id):
+    user_tables()
     db = sqlite3.connect(DB)
     c = db.cursor()
     query = 'SELECT * FROM students WHERE username = ?'
-    check = c.execute(query, username)
+    check = c.execute(query, (username,))
     if not check.fetchone():
         new_pass = hashlib.sha256(password).hexdigest()
         c.execute('INSERT INTO students VALUES (?,?,?,?,NULL)', (username, new_pass, osis, student_id))
