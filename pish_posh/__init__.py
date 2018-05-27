@@ -45,12 +45,9 @@ def auth():
         password = request.form['password']
         #osis = request.form['osis']
         #student_id = request.form['student_id']
-
     except KeyError:
-        print 'test'
         flash("Please fill everything in!")
         return render_template("login.html")
-
     '''
     db authentication
     '''
