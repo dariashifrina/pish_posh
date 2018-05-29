@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body>
-        <div onclick="classform()" class="button">Add a class</div>
-        <div id="formplace">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <div onclick="classform()" class="button">Add a class</div>
+    <div id="formplace">
 
-        </div>
-    </body>
-    <script type="text/javascript">
-        function classform() {
-            var ctext = '<form class="" action="/adminclass" method="POST">'+
-        						'Class name:<br>'+
-        						'<input type="text" name="name" value="">'+
-        						'<br>TID:<br>'+
-        						'<input type="text" name="tid" value="">'+
-        						'<br>Students:<br>'+
-        						'<input type="text" name="slist" value="[]">'+
-                                '<br>Description:<br>'+
-        						'<input type="text" name="desc" value="">'+
-                                '<br><input type="submit"></form>';
-            document.getElementById('formplace').innerHTML=ctext;
-        }
-    </script>
+    </div>
+  </body>
+  <script type="text/javascript">
+    function classform() {
+      var ctext = '<form class="" action="/adminclass" method="POST">'+
+        					'Class name:<br>'+
+        					'<input type="text" name="name" value="">'+
+        					'<br>TID:<br>'+
+        					'<input type="text" name="tid" value="">'+
+        					'<br>Students:<br>'+
+        					'<input type="text" name="slist" value="[]">'+
+                  '<br>Description:<br>'+
+        					'<input type="text" name="desc" value="">'+
+                  '<br><input type="submit"></form>';
+      document.getElementById('formplace').innerHTML=ctext;
+    }
+  </script>
 </html>
