@@ -104,6 +104,19 @@ def signauth():
         flash("username exists")
         return render_template("signup.html")
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
+@app.route('/classes')
+def classes():
+    if "username" in session:
+        return render_template('classes.html')
+    return redirect(url_for("auth"))
+
+'''
+This entire section is just dealing with my lazily written admin code. Sorry whoever reads it.
+'''
 
 if __name__ == '__main__':
     app.secret_key = os.urandom(32)
