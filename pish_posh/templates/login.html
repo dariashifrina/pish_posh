@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <head>
-<title>Login</title>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
-<center>
-<b> Log In </b>
-<form action="/auth" method="POST">
+  <center>
+    <b> Log In </b>
+    <form action="/auth" method="POST">
 
-Username: 
-<input type="text" name="username"> </input>
-<br> <br>
-Password:
-<input type="text" name="password"> </input>
-<br> <br>
-  <input type= "submit" name="submit" value="Login">
-</form>
-<br><br><br><br>
-or <b> Sign Up </b>
-<form action="/signup" method="POST">
-  <input type="submit" value="sign up"> 
-</form>
+      Username: 
+      <input type="text" name="username"> </input>
+      <br> <br>
+      Password:
+      <input type="text" name="password"> </input>
+      <br> <br>
+      <input type= "submit" name="submit" value="Login">
+    </form>
+    <br><br><br><br>
+    or <b> Sign Up </b>
+    <form action="/signup" method="POST">
+      <input type="submit" value="sign up"> 
+    </form>
 
-</center>
+  </center>
 </body>
 </html>
 
