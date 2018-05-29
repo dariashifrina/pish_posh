@@ -27,6 +27,26 @@ def add_student(username, password, osis, student_id):
     db.close()
     return False
 
+def get_id(table): #autmatically detects a new id
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT CID FROM classes;' #SQL was giving me a weird error so I hardcoded
+    ids = c.execute(query)
+    id = 0;
+    for iter in ids:
+        id+=1
+    print id
+
+def add_class(name, tid, slist, desc):
+    user_tables()
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    cid=get_id('classes')
+    c.execute('INSERT INTO classes VALUES (?,?,?,?,?)', (cid, name, tid, slist, desc))
+    db.commit()
+    db.close()
+    return True
+
 def auth(username, password):
     db = sqlite3.connect(DB)
     c = db.cursor()

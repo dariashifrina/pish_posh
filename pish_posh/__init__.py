@@ -117,6 +117,10 @@ def classes():
 '''
 This entire section is just dealing with my lazily written admin code. Sorry whoever reads it.
 '''
+@app.route('/adminclass', methods=['POST'])
+def adminclass():
+    return str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['slist']))
+    return render_template('expression')
 
 if __name__ == '__main__':
     app.secret_key = os.urandom(32)
