@@ -1,5 +1,6 @@
 import sqlite3
 import hashlib
+import json
 
 DB = "pish.db"
 
@@ -46,6 +47,72 @@ def add_class(name, tid, slist, desc):
     db.commit()
     db.close()
     return True
+
+def get_id_from_student(username):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM students WHERE username = ?'
+    check = c.execute(query, (username,))
+    ret = None
+    for q in check:
+        ret = q
+    id = ret[4]
+    db.close()
+    return id
+
+def get_classes_from_id(id):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM student_info WHERE ID = ?'
+    check = c.execute(query, (id,))
+    ret = None
+    for q in check:
+        ret = q
+    clist = ret[2]
+    db.close()
+    return clist
+
+def get_class_from_cid(cid):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM classes WHERE CID = ?'
+    check = c.execute(query, (cid,))
+    ret = None
+    for q in check:
+        ret = q
+    clist = str(ret[2]) + " - " + ret[4]
+    db.close()
+    return clist
+
+def get_classes_from_list(lst):
+    ret = ""
+    for num in lst:
+        ret += get_class_from_cid(num) + "<br>"
+    return ret
+
+def add_class(username, cl):
+    id = get_id_from_student(username)
+    orig = get_classes_from_id(id)
+    olst = json.loads(orig)
+    olst.append(cl)
+    nlist = json.dumps(olst)
+    update_classes(id, nlist)
+
+def update_classes(id, ncl):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    comm = 'UPDATE student_info SET CList = ? WHERE ID = ?'
+    c.execute(comm, (ncl, id))
+    db.commit()
+    db.close()
+
+def get_classes_from_student(username):
+    id = get_id_from_student(username)
+    clist = get_classes_from_id(id)
+    lst = json.loads(clist)
+    class_list = get_classes_from_list(lst)
+    return class_list
+
 
 def auth(username, password):
     db = sqlite3.connect(DB)

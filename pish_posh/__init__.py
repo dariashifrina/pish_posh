@@ -110,9 +110,11 @@ def admin():
 
 @app.route('/classes')
 def classes():
-    if "username" in session:
-        return render_template('classes.html')
-    return redirect(url_for("auth"))
+    if "username" not in session:
+        return redirect(url_for("auth"))
+    username = session['username']
+    return db_stuff.get_classes_from_student(username)
+    return render_template('classes.html')
 
 '''
 This entire section is just dealing with my lazily written admin code. Sorry whoever reads it.
@@ -121,6 +123,13 @@ This entire section is just dealing with my lazily written admin code. Sorry who
 def adminclass():
     return str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['slist']))
     return render_template('expression')
+
+@app.route('/addclass', methods=['POST'])
+def addclass():
+    cl = int(request.form['class'])
+    username=session['username']
+    db_stuff.add_class(username,cl)
+    return render_template('home.html')
 
 if __name__ == '__main__':
     app.secret_key = os.urandom(32)
