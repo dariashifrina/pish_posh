@@ -27,4 +27,5 @@ higginsH -- 2018-05-21 21:06:00
 -added github account to droplet
 -courtesy jpg of pish
 ----------------------------------------------------
-
+higginsH -- 2018-05-29 00:14:14
+-added bootstrap to html templates
