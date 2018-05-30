@@ -90,7 +90,7 @@ def get_classes_from_list(lst):
         ret += get_class_from_cid(num) + "<br>"
     return ret
 
-def add_class(username, cl):
+def append_class(username, cl):
     id = get_id_from_student(username)
     orig = get_classes_from_id(id)
     olst = json.loads(orig)

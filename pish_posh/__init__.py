@@ -128,7 +128,7 @@ def adminclass():
 def addclass():
     cl = int(request.form['class'])
     username=session['username']
-    db_stuff.add_class(username,cl)
+    db_stuff.append_class(username,cl)
     return render_template('home.html')
 
 if __name__ == '__main__':
