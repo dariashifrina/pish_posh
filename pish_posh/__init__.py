@@ -57,7 +57,7 @@ def auth():
         return redirect(url_for("homepage"))
     else:
         flash("oops! Login failed...")
-        return redirect(url_for('login'))
+        return redirect(url_for('root'))
 
 def min_thres(pswd):
     '''
