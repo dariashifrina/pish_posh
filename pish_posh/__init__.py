@@ -130,8 +130,8 @@ def addclass():
     username=session['username']
     db_stuff.append_class(username,cl)
     return render_template('home.html')
-
+app.secret_key = os.urandom(32)
 if __name__ == '__main__':
-    app.secret_key = os.urandom(32)
+    #app.secret_key = os.urandom(32)
     app.debug = True #DANGER DANGER! Set to FALSE before deployment!
     app.run()
