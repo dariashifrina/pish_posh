@@ -18,9 +18,11 @@ def add_student(username, password, osis, student_id):
     c = db.cursor()
     query = 'SELECT * FROM students WHERE username = ?'
     check = c.execute(query, (username,))
+    id = get_id('students','user_id')
     if not check.fetchone():
         new_pass = hashlib.sha256(password).hexdigest()
-        c.execute('INSERT INTO students VALUES (?,?,?,?,NULL)', (username, new_pass, osis, student_id))
+        c.execute('INSERT INTO students VALUES (?,?,?,?,?)', (username, new_pass, osis, student_id,id))
+        c.execute('INSERT INTO student_info VALUES (?, -1, ?)', (id, '[]'))
         db.commit()
         db.close()
         return True
@@ -28,10 +30,10 @@ def add_student(username, password, osis, student_id):
     db.close()
     return False
 
-def get_id(table): #autmatically detects a new id
+def get_id(table, param='CID'): #autmatically detects a new id
     db = sqlite3.connect(DB)
     c = db.cursor()
-    query = 'SELECT CID FROM classes;' #SQL was giving me a weird error so I hardcoded
+    query = 'SELECT '+ param + ' FROM ' + table #SQL was giving me a weird error so I hardcoded
     ids = c.execute(query)
     id = 0;
     for iter in ids:

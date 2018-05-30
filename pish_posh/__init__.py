@@ -121,7 +121,7 @@ This entire section is just dealing with my lazily written admin code. Sorry who
 '''
 @app.route('/adminclass', methods=['POST'])
 def adminclass():
-    return str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['slist']))
+    return str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['desc']))
     return render_template('expression')
 
 @app.route('/addclass', methods=['POST'])
