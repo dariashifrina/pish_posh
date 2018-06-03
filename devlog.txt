@@ -45,12 +45,12 @@ ionkinaK -- 2018-06-03 14:11:00
 - Takes Class ID, Type, Date, and Description for
   test/assignment and adds it to the database
 - Deleted homeroom table
-- Updated Database Scheme from desgin doc to 
+- Updated Database Schema from desgin doc to 
   reflect recent changes and current db 
 ----------------------------------------------------
 ionkinaK -- 2018-06-03 15:49:00
-- Updated databse functions in __init__.py and
+- Updated database functions in __init__.py and
   in db_stuff.py to reflect new and more efficient
-  databse schema
+  database schema
 - Updated pish.db 
 - add classes now works 
