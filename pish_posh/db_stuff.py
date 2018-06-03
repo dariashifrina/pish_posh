@@ -4,6 +4,7 @@ import json
 
 DB = "pish.db"
 
+'''
 def user_tables():
     db = sqlite3.connect(DB)
     c = db.cursor()
@@ -11,6 +12,8 @@ def user_tables():
     c.execute("CREATE TABLE IF NOT EXISTS teachers (username TEXT, password TEXT, user_id INTEGER PRIMARY KEY)")
     db.commit()
     db.close()
+'''
+
 
 def add_student(username, password, osis, student_id):
     user_tables()
@@ -41,7 +44,6 @@ def get_id(table, param='CID'): #autmatically detects a new id
     print id
 
 def add_class(name, tid, slist, desc):
-    user_tables()
     db = sqlite3.connect(DB)
     c = db.cursor()
     cid=get_id('classes')
@@ -49,6 +51,15 @@ def add_class(name, tid, slist, desc):
     db.commit()
     db.close()
     return True
+
+def add_work(cid, wdescr, type, date):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    c.execute('INSERT INTO class_work VALUES (?,?,?,?)', (cid, type, date, wdescr))
+    db.commit()
+    db.close()
+    return True
+
 
 def get_id_from_student(username):
     db = sqlite3.connect(DB)

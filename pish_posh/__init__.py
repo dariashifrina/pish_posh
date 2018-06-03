@@ -122,8 +122,13 @@ This entire section is just dealing with my lazily written admin code. Sorry who
 '''
 @app.route('/adminclass', methods=['POST'])
 def adminclass():
-    return str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['desc']))
+    print str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['desc']))
     return render_template('expression')
+
+@app.route('/adminwork', methods=['POST'])
+def adminwork():
+    print str(db_stuff.add_work(request.form['CID'], request.form['Wdescr'], request.form['Type'], request.form['Date']))
+    return render_template("home.html")
 
 @app.route('/addclass', methods=['POST'])
 def addclass():
@@ -131,6 +136,7 @@ def addclass():
     username=session['username']
     db_stuff.append_class(username,cl)
     return render_template('home.html')
+
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':
     #app.secret_key = os.urandom(32)

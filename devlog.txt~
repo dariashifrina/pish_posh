@@ -29,3 +29,13 @@ higginsH -- 2018-05-21 21:06:00
 ----------------------------------------------------
 higginsH -- 2018-05-29 00:14:14
 -added bootstrap to html templates
+----------------------------------------------------
+ionkinaK -- 2018-06-03 13:02:00
+-Changed database schema to be more efficient
+-Replaced class_info with class_work table which contains:
+	  - CID, 
+          - Type (0 for assignment, 1 for tests)
+	  - Date (type blob which should be stored as "yyyy-mm-dd"
+	  - Wdescr (wdecr = work description because descr is 
+	  used for classes table)
+- DB Browser is a cool tool 
