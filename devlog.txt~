@@ -39,3 +39,11 @@ ionkinaK -- 2018-06-03 13:02:00
 	  - Wdescr (wdecr = work description because descr is 
 	  used for classes table)
 - DB Browser is a cool tool 
+----------------------------------------------------
+ionkinaK -- 2018-06-03 14:11:00
+- Added "add classwork" option to /admin
+- Takes Class ID, Type, Date, and Description for
+  test/assignment and adds it to the database
+- Deleted homeroom table
+- Updated Database Scheme from desgin doc to 
+  reflect recent changes and current db 
