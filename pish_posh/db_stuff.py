@@ -14,18 +14,17 @@ def user_tables():
     db.close()
 '''
 
-
-def add_student(username, password, osis, student_id):
-    user_tables()
+def add_student(name, username, password, osis, sid):
+#    user_tables()
     db = sqlite3.connect(DB)
     c = db.cursor()
     query = 'SELECT * FROM students WHERE username = ?'
     check = c.execute(query, (username,))
-    id = get_id('students','user_id')
+    id = get_id('students','SID')
     if not check.fetchone():
         new_pass = hashlib.sha256(password).hexdigest()
-        c.execute('INSERT INTO students VALUES (?,?,?,?,?)', (username, new_pass, osis, student_id,id))
-        c.execute('INSERT INTO student_info VALUES (?, -1, ?)', (id, '[]'))
+        c.execute('INSERT INTO students VALUES (?,?,?,?,?)', (name, username, new_pass, osis, sid))
+        c.execute('INSERT INTO student_info VALUES (?, ?)', (sid, '[]'))
         db.commit()
         db.close()
         return True
@@ -60,7 +59,6 @@ def add_work(cid, wdescr, type, date):
     db.close()
     return True
 
-
 def get_id_from_student(username):
     db = sqlite3.connect(DB)
     c = db.cursor()
@@ -73,15 +71,19 @@ def get_id_from_student(username):
     db.close()
     return id
 
-def get_classes_from_id(id):
+def get_classes_from_id(sid):
     db = sqlite3.connect(DB)
     c = db.cursor()
-    query = 'SELECT * FROM student_info WHERE ID = ?'
-    check = c.execute(query, (id,))
+    query = 'SELECT * FROM student_info WHERE SID = ?'
+    check = c.execute(query, (sid,))
+    print check
     ret = None
-    for q in check:
-        ret = q
-    clist = ret[2]
+    try:
+        for q in check:
+            ret = q
+        clist = ret[1]
+    except:
+        clist = []
     db.close()
     return clist
 
@@ -114,13 +116,14 @@ def append_class(username, cl):
 def update_classes(id, ncl):
     db = sqlite3.connect(DB)
     c = db.cursor()
-    comm = 'UPDATE student_info SET CList = ? WHERE ID = ?'
+    comm = 'UPDATE student_info SET CList = ? WHERE SID = ?'
     c.execute(comm, (ncl, id))
     db.commit()
     db.close()
 
 def get_classes_from_student(username):
     id = get_id_from_student(username)
+    print id
     clist = get_classes_from_id(id)
     lst = json.loads(clist)
     class_list = get_classes_from_list(lst)
@@ -137,4 +140,5 @@ def auth(username, password):
     db.close()
     return ret
 
-print get_classes_from_student('a')
+#print get_classes_from_student("a")
+#add_student('Karina', 'kionkina', 'Boop1', 209853738, 4193)

@@ -83,22 +83,27 @@ def signauth():
     if request.method == "GET":
         return redirect("/")
     try:
+        name = request.form['name']
         username = request.form['username']
         password0 = request.form['password0']
         password1 = request.form['password1']
         osis = request.form['osis']
-        student_id = request.form['student_id']
+        sid = request.form['sid']
     except KeyError:
         flash("Fill evrything in!")
+        print "Fail0"
         return render_template("signup.html")
     if password0 != password1:
         flash("Passwords don't match!")
+        print "fail1"
         return render_template("signup.html")
     if not min_thres(password0):
         flash("Password must contain upper- and lowercase letters and at least one number")
+        print "fail2"
         return render_template("signup.html")
-    if db_stuff.add_student(username, password0, osis, student_id):
+    if db_stuff.add_student(name,username, password0, osis, sid):
         flash("successfully created!")
+        print "sucess!"
         return redirect(url_for("homepage"))
     else:
         flash("username exists")
@@ -133,7 +138,7 @@ def adminwork():
 @app.route('/addclass', methods=['POST'])
 def addclass():
     cl = int(request.form['class'])
-    username=session['username']
+    username = session['username']
     db_stuff.append_class(username,cl)
     return render_template('home.html')
 
