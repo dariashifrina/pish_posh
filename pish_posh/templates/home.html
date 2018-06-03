@@ -86,11 +86,24 @@
       <a href="#">Teachers</a>
       <a href="#">Submit an absence note</a>
     </div>
+
+
+// adding a class
+
     <form class="" action="/addclass" method="POST">
         Add a class
         <input type="text" name="class" value="">
         <input type="submit" name="submit" value="submit">
     </form>
+
+
+
+
+
+
+
+
+
 
 
       <div id="chart" class="clearfix"></div>
@@ -180,6 +193,8 @@
       .style("z-index", "10")
       .style("visibility", "hidden")
       .text("a simple tooltip");
+
+//
 
     d3.csv("static/dji.csv", function(error, csv) {
       var data = d3.nest()
