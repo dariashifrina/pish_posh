@@ -113,8 +113,9 @@ def classes():
     if "username" not in session:
         return redirect(url_for("auth"))
     username = session['username']
-    return db_stuff.get_classes_from_student(username)
-    return render_template('classes.html')
+    classes = db_stuff.get_classes_from_student(username)
+    headings = ['ID', "Name", "Description"]
+    return render_template('info.html', table=classes, headings=headings)
 
 '''
 This entire section is just dealing with my lazily written admin code. Sorry whoever reads it.

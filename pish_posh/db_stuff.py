@@ -82,14 +82,14 @@ def get_class_from_cid(cid):
     ret = None
     for q in check:
         ret = q
-    clist = str(ret[2]) + " - " + ret[4]
+    clist = [ret[0], ret[1], ret[4]]
     db.close()
     return clist
 
 def get_classes_from_list(lst):
-    ret = ""
+    ret = []
     for num in lst:
-        ret += get_class_from_cid(num) + "<br>"
+        ret.append(get_class_from_cid(num))
     return ret
 
 def append_class(username, cl):
@@ -125,3 +125,5 @@ def auth(username, password):
     ret = check.fetchone()
     db.close()
     return ret
+
+print get_classes_from_student('a')
