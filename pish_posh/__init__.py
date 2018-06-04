@@ -92,28 +92,17 @@ def signauth():
         sid = request.form['sid']
     except KeyError:
         flash("Fill evrything in!")
-<<<<<<< HEAD
+        print "Fail0"
         return render_template("signup.html", error = "Fill in all fields.")
     if password0 != password1:
         flash("Passwords don't match!")
+        print "Fail1"
         return render_template("signup.html", error = "Passwords do not match.")
     if not min_thres(password0):
         flash("Password must contain upper- and lowercase letters and at least one number")
-        return render_template("signup.html", error = "Passwords must contain both upper and lowercase letters, and at least one number.")
-    if db_stuff.add_student(username, password0, osis, student_id):
-=======
-        print "Fail0"
-        return render_template("signup.html")
-    if password0 != password1:
-        flash("Passwords don't match!")
-        print "fail1"
-        return render_template("signup.html")
-    if not min_thres(password0):
-        flash("Password must contain upper- and lowercase letters and at least one number")
         print "fail2"
-        return render_template("signup.html")
+        return render_template("signup.html", error = "Passwords must contain both upper and lowercase letters, and at least one number.")
     if db_stuff.add_student(name,username, password0, osis, sid):
->>>>>>> 8ff8fa07b559a88d71e167705705893b8e4a04f6
         flash("successfully created!")
         print "sucess!"
         return redirect(url_for("homepage"))
