@@ -84,13 +84,15 @@ def signauth():
     if request.method == "GET":
         return redirect("/")
     try:
+        name = request.form['name']
         username = request.form['username']
         password0 = request.form['password0']
         password1 = request.form['password1']
         osis = request.form['osis']
-        student_id = request.form['student_id']
+        sid = request.form['sid']
     except KeyError:
         flash("Fill evrything in!")
+<<<<<<< HEAD
         return render_template("signup.html", error = "Fill in all fields.")
     if password0 != password1:
         flash("Passwords don't match!")
@@ -99,7 +101,21 @@ def signauth():
         flash("Password must contain upper- and lowercase letters and at least one number")
         return render_template("signup.html", error = "Passwords must contain both upper and lowercase letters, and at least one number.")
     if db_stuff.add_student(username, password0, osis, student_id):
+=======
+        print "Fail0"
+        return render_template("signup.html")
+    if password0 != password1:
+        flash("Passwords don't match!")
+        print "fail1"
+        return render_template("signup.html")
+    if not min_thres(password0):
+        flash("Password must contain upper- and lowercase letters and at least one number")
+        print "fail2"
+        return render_template("signup.html")
+    if db_stuff.add_student(name,username, password0, osis, sid):
+>>>>>>> 8ff8fa07b559a88d71e167705705893b8e4a04f6
         flash("successfully created!")
+        print "sucess!"
         return redirect(url_for("homepage"))
     else:
         flash("username exists")
@@ -114,25 +130,32 @@ def classes():
     if "username" not in session:
         return redirect(url_for("auth"))
     username = session['username']
-    return db_stuff.get_classes_from_student(username)
-    return render_template('classes.html')
+    classes = db_stuff.get_classes_from_student(username)
+    headings = ['ID', "Name", "Description"]
+    return render_template('info.html', table=classes, headings=headings)
 
 '''
 This entire section is just dealing with my lazily written admin code. Sorry whoever reads it.
 '''
 @app.route('/adminclass', methods=['POST'])
 def adminclass():
-    return str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['slist']))
+    print str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['desc']))
     return render_template('expression')
+
+@app.route('/adminwork', methods=['POST'])
+def adminwork():
+    print str(db_stuff.add_work(request.form['CID'], request.form['Wdescr'], request.form['Type'], request.form['Date']))
+    return render_template("home.html")
 
 @app.route('/addclass', methods=['POST'])
 def addclass():
     cl = int(request.form['class'])
-    username=session['username']
-    db_stuff.add_class(username,cl)
+    username = session['username']
+    db_stuff.append_class(username,cl)
     return render_template('home.html')
 
+app.secret_key = os.urandom(32)
 if __name__ == '__main__':
-    app.secret_key = os.urandom(32)
+    #app.secret_key = os.urandom(32)
     app.debug = True #DANGER DANGER! Set to FALSE before deployment!
     app.run()

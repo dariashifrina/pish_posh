@@ -29,6 +29,34 @@ higginsH -- 2018-05-21 21:06:00
 ----------------------------------------------------
 higginsH -- 2018-05-29 00:14:14
 -added bootstrap to html templates
+<<<<<<< HEAD
 shifrinaD -- 2018-06-03 22:25:30
 Customized login template for site.<br> Added log.sh to update devlog easier.
 
+=======
+----------------------------------------------------
+ionkinaK -- 2018-06-03 13:02:00
+-Changed database schema to be more efficient
+-Replaced class_info with class_work table which contains:
+	  - CID, 
+          - Type (0 for assignment, 1 for tests)
+	  - Date (type blob which should be stored as "yyyy-mm-dd"
+	  - Wdescr (wdecr = work description because descr is 
+	  used for classes table)
+- DB Browser is a cool tool 
+----------------------------------------------------
+ionkinaK -- 2018-06-03 14:11:00
+- Added "add classwork" option to /admin
+- Takes Class ID, Type, Date, and Description for
+  test/assignment and adds it to the database
+- Deleted homeroom table
+- Updated Database Schema from desgin doc to 
+  reflect recent changes and current db 
+----------------------------------------------------
+ionkinaK -- 2018-06-03 15:49:00
+- Updated database functions in __init__.py and
+  in db_stuff.py to reflect new and more efficient
+  database schema
+- Updated pish.db 
+- add classes now works 
+>>>>>>> 8ff8fa07b559a88d71e167705705893b8e4a04f6
