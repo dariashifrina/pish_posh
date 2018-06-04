@@ -1,118 +1,61 @@
-<!DOCTYPE html>
-<!--<head>
-  <title>Login</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+{% extends "basetemp.html" %}
 
-<body>
+{% block title %}
 
-  <center>
-    <b> Log In </b>
-    <form action="/auth" method="POST">
+StuyPlanner Login
 
-      Username: 
-      <input type="text" name="username"> </input>
-      <br> <br>
-      Password:
-      <input type="text" name="password"> </input>
-      <br> <br>
-      <input type= "submit" name="submit" value="Login">
-    </form>
-    <br><br><br><br>
-    or <b> Sign Up </b>
-    <form action="/signup" method="POST">
-      <input type="submit" value="sign up"> 
-    </form>
+{% endblock %}
 
-  </center>
-</body>
-</html>-->
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
+<form class="login100-form validate-form" action="/auth" method="POST">
+					<span class="login100-form-title">
+						Log in to StuyPlanner
+					</span>
 
-<head>
+        {% if error %}
+      <p><strong>Error:</strong> {{ error }}
+      {% endif %}
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+					<div class="wrap-input100 validate-input" data-validate = "Valid username is required: johndoe">
+						<input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+					        <input  class="login100-form-btn" type= "submit" name="submit" value="Login">
+					</div>
+<!-- in progress
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Forgot
+						</span>
+						<a class="txt2" href="#">
+							Username / Password?
+						</a>
+					</div>
+-->
 
-    <!-- Bootstrap core CSS -->
-    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+					<div class="text-center p-t-136">
+						<a class="txt2" href="/signup">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+</div>
 
-    <!-- Custom styles for this template -->
-    <link href="static/css/simple-sidebar.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        StuyJournal
-                    </a>
-                </li>
-                <li>
-                    <a href="/">Login</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <h1>Login!</h1>
- <form action="/auth" method="POST">
-
-      Username: 
-      <input type="text" name="username"> </input>
-      <br> <br>
-      Password:
-      <input type="text" name="password"> </input>
-      <br> <br>
-      <input type= "submit" name="submit" value="Login">
-    </form>
-    <br><br><br><br>
-    <h1> Sign Up!</h1>
-    <form action="/signup" method="POST">
-      <input type="submit" value="sign up"> 
-    </form>
-                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
-            </div>
-        </div>
-        <!-- /#page-content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="static/vendor/jquery/jquery.min.js"></script>
-    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
-</body>
-
-</html>
-
-
-
-
+{% endblock %}

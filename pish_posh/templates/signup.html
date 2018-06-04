@@ -1,36 +1,56 @@
-<!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <title>Sign Up</title>
-</head>
+{% extends "basetemp.html" %}
 
-<body>
+{% block title %}
+StuyPlanner Sign Up
+{% endblock %}
 
-  <center>
-    <b> Log In </b>
-    <form action="/signauth" method="POST">
+{% block content %}
+<form class="login100-form validate-form" action="/signauth" method="POST">
+  <span class="login100-form-title">
+    Sign Up for StuyPlanner
+  </span>
+        {% if error %}
+      <p><strong>Error:</strong> {{ error }}
+      {% endif %}
+  <div class="wrap-input100 validate-input" data-validate = "Valid username is required: johndoe">
+    	<input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100"></span>
+					
+						</span>
+</div>
 
-      Username:
-      <input type="text" name="username"> </input>
-      <br> <br>
-      Password:
-      <input type="text" name="password0"> </input>
-      <br> <br>
-      Password Again:
-      <input type="text" name="password1"> </input>
-      <br> <br>
-      Osis
-      <input type="text" name="osis"> </input>
-      <br> <br>
-      Student ID:
-      <input type="text" name="student_id"> </input>
+	<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password0" placeholder="Password">
+						<span class="focus-input100"></span>
+					
+	</div>
 
-      <br> <br>
-      <input type= "submit" name="submit" value="Sign Up">
+	<div class="wrap-input100 validate-input" data-validate = "Password is required">
+	  <input class="input100" type="password" name="password1" placeholder="Repeat Password">
+	  <span class="focus-input100"></span>
+					
+	</div>
+
+
+  <div class="wrap-input100 validate-input" data-validate = "Valid OSIS is required: 111111111">
+    	<input class="input100" type="text" name="osis" placeholder="OSIS">
+						<span class="focus-input100"></span>
+					
+						</span>
+</div>
+
+  <div class="wrap-input100 validate-input" data-validate = "Valid Student ID is required: 1111">
+    	<input class="input100" type="text" name="student_id" placeholder="Student ID">
+						<span class="focus-input100"></span>
+					
+						</span>
+</div>
+<input  class="login100-form-btn" type= "submit" name="submit" value="Sign Up">
+	<div class="text-center p-t-136">
+						<a class="txt2" href="/">
+							Return to Login
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
     </form>
-
-</body>
-</html>
+{% endblock %}

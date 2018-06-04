@@ -6,7 +6,7 @@ import db_stuff
 
 
 app = Flask(__name__)
-
+app.secret_key = 'some_secret'
 DIR = path.dirname(__file__)
 
 
@@ -47,7 +47,7 @@ def auth():
         #student_id = request.form['student_id']
     except KeyError:
         flash("Please fill everything in!")
-        return render_template("login.html")
+        return render_template("login.html", error = "Please fill everything in!")
     '''
     db authentication
     '''
@@ -57,7 +57,8 @@ def auth():
         return redirect(url_for("homepage"))
     else:
         flash("oops! Login failed...")
-        return redirect(url_for('root'))
+        return render_template("login.html", error = "Wrong credentials. Please try again.")
+    #redirect(url_for('root'))
 
 def min_thres(pswd):
     '''
@@ -90,19 +91,19 @@ def signauth():
         student_id = request.form['student_id']
     except KeyError:
         flash("Fill evrything in!")
-        return render_template("signup.html")
+        return render_template("signup.html", error = "Fill in all fields.")
     if password0 != password1:
         flash("Passwords don't match!")
-        return render_template("signup.html")
+        return render_template("signup.html", error = "Passwords do not match.")
     if not min_thres(password0):
         flash("Password must contain upper- and lowercase letters and at least one number")
-        return render_template("signup.html")
+        return render_template("signup.html", error = "Passwords must contain both upper and lowercase letters, and at least one number.")
     if db_stuff.add_student(username, password0, osis, student_id):
         flash("successfully created!")
         return redirect(url_for("homepage"))
     else:
         flash("username exists")
-        return render_template("signup.html")
+        return render_template("signup.html", error = "Username already exists.")
 
 @app.route('/admin')
 def admin():
