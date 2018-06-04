@@ -58,3 +58,7 @@ ionkinaK -- 2018-06-03 15:49:00
 shifrinaD -- 2018-06-03 22:25:30
 Customized login template for site.
 Added log.sh to update devlog easier.
+----------------------------------------------------
+shifrinaD -- 2018-06-04 18:27:34
+Linked bootstrap to online sources to save space.
+
