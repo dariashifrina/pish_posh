@@ -72,5 +72,6 @@ To edit styling of login/sign up, use main.css in static/login
 
 ----------------------------------------------------
 shifrinaD -- 2018-06-04 21:28:42
-Personalized homepage to reflect student info. Added form to only update password (as it makes no sense for student to edit their osis, user, name, or student id).
+Personalized homepage to reflect student info. 
+Added form to only update password (as it makes no sense for student to edit their osis, user, name, or student id).
 
