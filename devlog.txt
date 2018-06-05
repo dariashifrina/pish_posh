@@ -79,3 +79,7 @@ Added form to only update password (as it makes no sense for student to edit the
 shifrinaD -- 2018-06-05 00:16:43
 Began work on teacher part of site. Changed teacher database to reflect new schema. Created login for teachers + redirection to teacher homepage.
 
+----------------------------------------------------
+ionkinaK -- 2018-06-05 11:07:19
+added tid to teachers database, commented out calendar stuff because we need to implement a better one
+
