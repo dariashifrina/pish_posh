@@ -414,13 +414,13 @@ def adminclass():
     print str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['desc']))
     return render_template('expression')
 
-@app.route('/adminwork', methods=['POST'])
-def adminwork():
+@app.route('/teacherwork', methods=['POST'])
+def teacherwork():
     print str(db_stuff.add_work(request.form['CID'], request.form['Wdescr'], request.form['Type'], request.form['Date']))
     return render_template("home.html")
 
 @app.route('/addwork', methods=['GET','POST'])
-def addclass():
+def addwork():
     if 'username' in session:
         username = session['username']
         return render_template('teachers/addwork.html', username = username, classes=[{'CID': 'hello', 'name': 'there'}, {'CID': 'general', "name":'kenobi'}])
