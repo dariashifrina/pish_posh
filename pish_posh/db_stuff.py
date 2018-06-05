@@ -234,3 +234,17 @@ def adminauth(username, password):
     print ret
     db.close()
     return ret
+
+
+def get_tid_from_teacher(username):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = "SELECT TID FROM teachers where username = '" + username + "'"
+    tid = c.execute(query).fetchall()
+    print tid[0][0]
+
+def get_classes_from_teacher(tid):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = "SELECT TID FROM teachers where TID = '" + tid + "'"
+    classes = c.execute(query).fetchall()

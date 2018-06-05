@@ -423,9 +423,12 @@ def teacherwork():
 def addwork():
     if 'username' in session:
         username = session['username']
-        return render_template('teachers/addwork.html', username = username, classes=[{'CID': 'hello', 'name': 'there'}, {'CID': 'general', "name":'kenobi'}])
+        list_of_classes = db_stuff.get_teacher_classes(username)
+        return render_template('teachers/addwork.html', username = username, classes = list_of_classes)
     else:
         return render_template("login.html")
+
+
 
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':
