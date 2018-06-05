@@ -79,7 +79,7 @@ def signup():
         return redirect(url_for("homepage"))
     else:
         return redirect(url_for("logout"))
-    
+
 @app.route('/teachersignup', methods=["GET", "POST"])
 def teachersignup():
     if "username" not in session:
@@ -194,7 +194,7 @@ def updatepass():
                 print "success!"
                 return redirect(url_for("logout"))
         else:
-            return redirect(url_for("logout"))        
+            return redirect(url_for("logout"))
     return redirect(url_for("auth"))
 ############################################################################
 ##############LOGIN AUTHORIZATION ##########################################
@@ -423,7 +423,7 @@ def adminwork():
 def addclass():
     if 'username' in session:
         username = session['username']
-        return render_template('teachers/addwork.html', username = username)
+        return render_template('teachers/addwork.html', username = username, classes=[{'CID': 'hello', 'name': 'there'}, {'CID': 'general', "name":'kenobi'}])
     else:
         return render_template("login.html")
 

@@ -8,11 +8,17 @@ Add Classes
 {% endblock %}
     {% block content %}
      <div class="container-fluid p-0">
-    <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about"> 
-
+    <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
       <h2 class="mb-5">Add Work To Classes</h2>
+
         <form class="" action="/adminwork" method="POST">
       <br><br><Br><Br><br><br>
+          <select name="chooseclass">
+              {% for class in classes %}
+              <option value="{{ class.CID }}">{{ class.name }}</option>
+                      {{ class|e }}
+              {% endfor %}
+          </select>
         <div class="subheading mb-3">Type of Work:</div>
 	<select>
 	  <option value="0"> Assignemnt </option>
@@ -21,6 +27,6 @@ Add Classes
         <div class="subheading mb-3">Description:</div>
         <input type="text" name="wdescr" value="">
         <br><input type="submit"></form>
-      </p> </section>
+    </p>
 {% endblock %}
 </html>
