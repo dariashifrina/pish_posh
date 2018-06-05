@@ -31,13 +31,13 @@ def student_login():
 @app.route('/teacherlogin')
 def teacher_login():
     if "username" in session:
-        return redirect(url_for("homepage"))
+        return redirect(url_for("teacherhomepage"))
     return render_template("teacherlogin.html")
 
 @app.route('/adminlogin')
 def admin_login():
     if "username" in session:
-        return redirect(url_for("homepage"))
+        return redirect(url_for("adminhomepage"))
     return render_template("adminlogin.html")
 
 #############################################################
