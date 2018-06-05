@@ -1,0 +1,114 @@
+{% extends "admin/home2.html" %}
+{% block title %}
+Add Classes
+{% endblock %}
+{% block style %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+    {% block content %}
+    <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
+      <h2 class="mb-5">Add Classes</h2>
+      <p class="mb-5"> 
+      <form class="" action="/adminclass" method="POST">
+	<br><br><br><br><br><div class="subheading mb-3">Class Name:</div>
+        <input type="text" name="name" value="">
+        <div class="subheading mb-3">TID:</div>
+        <input type="text" name="tid" value="">
+       <div class="subheading mb-3">Students:</div>
+        <input type="text" name="slist" value="[]">
+        <div class="subheading mb-3">Description:</div>
+        <input type="text" name="desc" value="">
+        <br><input type="submit"></form>
+      </p>
+   <!-- <button onclick="classform()">Add a class</button><br>
+    <button onclick="workform()" > Add a Test or Assignment </button>
+    <div id="formplace">     </div>
+    <br><br><br><br>
+    <div id="formplace2">     </div>
+  <script type="text/javascript">
+    function classform() {
+      var ctext = '<form class="" action="/adminclass" method="POST">'+
+        					'Class name:<br>'+
+        					'<input type="text" name="name" value="">'+
+        					'<br>TID:<br>'+
+        					'<input type="text" name="tid" value="">'+
+        					'<br>Students:<br>'+
+        					'<input type="text" name="slist" value="[]">'+
+                  '<br>Description:<br>'+
+        					'<input type="text" name="desc" value="">'+
+                  '<br><input type="submit"></form>';
+      document.getElementById('formplace').innerHTML=ctext;
+    }
+  </script>
+  <br>
+  <br>
+  <script type="text/javascript">
+    function workform(){
+      var wtext = '<form class="" action="/adminwork" method="POST">' +
+                                                'CID:<br>' +
+                                                '<input type="text" name="CID" value="">' +
+                                                '<br> Descr: <br>'+
+                                                '<input type="text" name="Wdescr" value="">' +
+                                                '<br> Type (0 for assignment, 1 for test): <br>'+
+                                                '<input type="text" name="Type" value="">' +
+                                                '<br> Date (yyyy-mm-dd) <br>'+
+                                                '<input type="text" name="Date" value="">' +
+                  '<br><input type="submit"></form>';
+    document.getElementById('formplace2').innerHTML= wtext;
+}
+  </script>
+
+  {% endblock %}
+
+<!--<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <button onclick="classform()" class="button">Add a class</button>
+    <button onclick="workform()" > Add a Test or Assignment </button>
+    <div id="formplace">     </div>
+    <br><br><br><br>
+    <div id="formplace2">     </div>
+
+
+  </body>
+  <script type="text/javascript">
+    function classform() {
+      var ctext = '<form class="" action="/adminclass" method="POST">'+
+        					'Class name:<br>'+
+        					'<input type="text" name="name" value="">'+
+        					'<br>TID:<br>'+
+        					'<input type="text" name="tid" value="">'+
+        					'<br>Students:<br>'+
+        					'<input type="text" name="slist" value="[]">'+
+                  '<br>Description:<br>'+
+        					'<input type="text" name="desc" value="">'+
+                  '<br><input type="submit"></form>';
+      document.getElementById('formplace').innerHTML=ctext;
+    }
+  </script>
+  <br>
+  <br>
+  <script type="text/javascript">
+    function workform(){
+      var wtext = '<form class="" action="/adminwork" method="POST">' +
+                                                'CID:<br>' +
+                                                '<input type="text" name="CID" value="">' +
+                                                '<br> Descr: <br>'+
+                                                '<input type="text" name="Wdescr" value="">' +
+                                                '<br> Type (0 for assignment, 1 for test): <br>'+
+                                                '<input type="text" name="Type" value="">' +
+                                                '<br> Date (yyyy-mm-dd) <br>'+
+                                                '<input type="text" name="Date" value="">' +
+                  '<br><input type="submit"></form>';
+    document.getElementById('formplace2').innerHTML= wtext;
+}
+</script> -->
+</html>-->
