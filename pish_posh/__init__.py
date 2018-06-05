@@ -17,6 +17,25 @@ DIR = path.dirname(__file__)
 def root():
     if "username" in session:
         return redirect(url_for("homepage"))
+    return render_template("index2.html")
+
+@app.route('/studentlogin')
+def student_login():
+    if "username" in session:
+        return redirect(url_for("homepage"))
+    return render_template("login.html")
+
+@app.route('/teacherlogin')
+def teacher_login():
+    if "username" in session:
+        return redirect(url_for("homepage"))
+    return render_template("teacherlogin.html")
+
+@app.route('/logout')
+def logout():
+    if "username" in session:
+        session.pop("username")
+        return redirect(url_for("root"))
     return render_template("login.html")
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -54,6 +73,20 @@ def calendar_page():
         return render_template("calendar.html", username = session["username"])
     return redirect(url_for("auth"))
 
+###########################################################################
+##################### TEACHERPAGES #########################################
+@app.route('/home', methods=["GET","POST"])
+def teacherhomepage():
+    if "username" in session:
+        username = session["username"]
+        # name = db_stuff.get_name_from_student(username)
+        # stuid = db_stuff.get_id_from_student(username)
+        # osis = db_stuff.get_osis_from_student(username)
+        #email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
+        return render_template("teachers/home.html", username = session["username"])
+    return redirect(url_for("teacherauth"))
+
+
 ############################################################################
 ################# STUDENT ACTIONS ##########################################
 @app.route('/updatestudentpass', methods=["GET","POST"])
@@ -88,6 +121,7 @@ def updatepass():
             return redirect(url_for("homepage"))
     return redirect(url_for("auth"))
 ############################################################################
+##############LOGIN AUTHORIZATION ##########################################
 
 @app.route('/auth', methods=["GET", "POST"])
 def auth():
@@ -115,6 +149,36 @@ def auth():
         return render_template("login.html", error = "Wrong credentials. Please try again.")
     #redirect(url_for('root'))
 
+@app.route('/teacherauth', methods=["GET", "POST"])
+def teacherauth():
+    if "username" in session:
+        return redirect(url_for("homepage"))
+    if request.method == "GET":
+        return redirect("/")
+    try:
+        username = request.form['username']
+        password = request.form['password']
+        #osis = request.form['osis']
+        #student_id = request.form['student_id']
+    except KeyError:
+        flash("Please fill everything in!")
+        return render_template("teacherlogin.html", error = "Please fill everything in!")
+    '''
+    db authentication
+    '''
+    #print(username)
+    #print(hashlib.sha256(password).hexdigest())
+    if db_stuff.teacherauth(username,password):
+        session['username'] = username
+        flash("You're logged in!")
+        return redirect(url_for("teacherhomepage"))
+    else:
+        flash("oops! Login failed...")
+        return render_template("teacherlogin.html", error = "Wrong credentials. Please try again.")
+    #redirect(url_for('root'))
+
+
+    
 def min_thres(pswd):
     '''
     Returns whether a password meets minimum threshold:

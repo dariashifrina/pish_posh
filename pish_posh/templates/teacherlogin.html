@@ -2,15 +2,15 @@
 
 {% block title %}
 
-Student Login
+Teacher Login
 
 {% endblock %}
 
 {% block content %}
 
-<form class="login100-form validate-form" action="/auth" method="POST">
+<form class="login100-form validate-form" action="/teacherauth" method="POST">
 					<span class="login100-form-title">
-						Student<br>Log in to StuyPlanner
+						Teacher<br>Log in to StuyPlanner
 					</span>
 
         {% if error %}
@@ -36,6 +36,11 @@ Student Login
 					<div class="container-login100-form-btn">
 					        <input  class="login100-form-btn" type= "submit" name="submit" value="Login">
 					</div>
+					<div class="text-center p-t-136">
+						<a class="txt2" href="/signup">
+							<!--div for spacing issues -->
+						</a>
+					</div>
 <!-- in progress
 					<div class="text-center p-t-12">
 						<span class="txt1">
@@ -47,12 +52,6 @@ Student Login
 					</div>
 -->
 
-					<div class="text-center p-t-136">
-						<a class="txt2" href="/signup">
-							Create your Account
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
-					</div>
 				</form>
 			</div>
 		</div>

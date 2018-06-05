@@ -13,7 +13,7 @@ def user_tables():
     db.commit()
     db.close()
 '''
-
+#################students DB FXNS#################################
 def add_student(name, lastname, username, password, osis, sid):
 #    user_tables()
     db = sqlite3.connect(DB)
@@ -191,3 +191,32 @@ def auth(username, password):
 
 #print get_classes_from_student("a")
 #add_student('Karina', 'kionkina', 'Boop1', 209853738, 4193)
+
+#######teachers DB FXNS##########################################
+def add_teacher(firstname, lastname, username, password):
+#    user_tables()
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM teachers WHERE username = ?'
+    check = c.execute(query, (username,))
+    if not check.fetchone():
+        new_pass = hashlib.sha256(password).hexdigest()
+        c.execute('INSERT INTO teachers VALUES (?,?,?,?,?)', (firstname,lastname, username, password, ""))
+#        c.execute('INSERT INTO student_info VALUES (?, ?)', (sid, '[]'))
+        db.commit()
+        db.close()
+        return True
+    db.commit()
+    db.close()
+    return False
+
+def teacherauth(username, password):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    passs = hashlib.sha256(password).hexdigest()
+    query = 'SELECT password FROM teachers WHERE username = ? AND password = ?'
+    check = c.execute(query, (username, passs))
+    ret = check.fetchone()
+    print ret
+    db.close()
+    return ret

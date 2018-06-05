@@ -1,0 +1,33 @@
+{% extends "basetemp.html" %}
+
+{% block title %}
+
+StuyPlanner Login
+
+{% endblock %}
+
+{% block content %}
+
+<form class="login100-form validate-form" action="/auth" method="POST">
+					<span class="login100-form-title">
+						Log in to StuyPlanner
+					</span>
+					
+					<div class="container-login100-form-btn">
+					        <a href="/teacherlogin"  class="login100-form-btn">Teacher Login</a>
+					</div>
+					<div class="container-login100-form-btn">
+					        <a href="/studentlogin"  class="login100-form-btn">Student Login</a>
+					</div>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="/signup">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+			</div>
+		</div>
+</div>
+
+{% endblock %}

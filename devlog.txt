@@ -75,3 +75,7 @@ shifrinaD -- 2018-06-04 21:28:42
 Personalized homepage to reflect student info. 
 Added form to only update password (as it makes no sense for student to edit their osis, user, name, or student id).
 
+----------------------------------------------------
+shifrinaD -- 2018-06-05 00:16:43
+Began work on teacher part of site. Changed teacher database to reflect new schema. Created login for teachers + redirection to teacher homepage.
+
