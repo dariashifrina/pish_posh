@@ -67,7 +67,7 @@ def teachersignup():
     else:
         flash("you are logged in")
         return redirect(url_for("teacherhomepage"))
-    
+
 ###########################################################################
 ################## STUDENT PAGES #########################################
 @app.route('/homepage', methods=["GET","POST"])
@@ -242,7 +242,7 @@ def adminauth():
     #redirect(url_for('root'))
 
 
-    
+
 def min_thres(pswd):
     '''
     Returns whether a password meets minimum threshold:
@@ -327,7 +327,7 @@ def teachersignauth():
     else:
         flash("username exists")
         return render_template("teachers/signup.html", error = "Username already exists.")
-    
+
 ####################################################################################################
 
 @app.route('/admin')
@@ -356,12 +356,12 @@ def adminwork():
     print str(db_stuff.add_work(request.form['CID'], request.form['Wdescr'], request.form['Type'], request.form['Date']))
     return render_template("home.html")
 
-@app.route('/addclass', methods=['POST'])
+@app.route('/addwork', methods=['POST'])
 def addclass():
     cl = int(request.form['class'])
     username = session['username']
     db_stuff.append_class(username,cl)
-    return render_template('home.html')
+    return render_template('microsoftsucks.html')
 
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':
