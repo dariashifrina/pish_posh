@@ -241,10 +241,14 @@ def get_tid_from_teacher(username):
     c = db.cursor()
     query = "SELECT TID FROM teachers where username = '" + username + "'"
     tid = c.execute(query).fetchall()
-    print tid[0][0]
+    return tid[0][0]
 
-def get_classes_from_teacher(tid):
+def get_classes_from_teacher(username):
     db = sqlite3.connect(DB)
     c = db.cursor()
-    query = "SELECT TID FROM teachers where TID = '" + tid + "'"
+    tid = get_tid_from_teacher(username)
+    query = "SELECT CID FROM classes where TID = '" + str(tid) + "'"
     classes = c.execute(query).fetchall()
+    return classes[0][0]
+
+print get_classes_from_teacher('tbm')
