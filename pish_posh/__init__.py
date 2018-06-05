@@ -16,7 +16,12 @@ DIR = path.dirname(__file__)
 @app.route('/')
 def root():
     if "username" in session:
-        return redirect(url_for("homepage"))
+        if session["account"] == "student":
+            return redirect(url_for("homepage"))
+        if session["account"] == "teacher":
+            return redirect(url_for("teacherhomepage"))
+        if session["account"] == "admin":
+            return redirect(url_for("adminhomepage"))
     return render_template("index2.html")
 
 ###############################################################
@@ -25,19 +30,31 @@ def root():
 @app.route('/studentlogin')
 def student_login():
     if "username" in session:
-        return redirect(url_for("homepage"))
+        if session["account"] == 'student':
+            return redirect(url_for("homepage"))
+        else:
+            session.pop("username")
+            session.pop("account")
     return render_template("login.html")
 
 @app.route('/teacherlogin')
 def teacher_login():
     if "username" in session:
-        return redirect(url_for("teacherhomepage"))
+        if session["account"] == 'teacher':
+            return redirect(url_for("teacherhomepage"))
+        else:
+            session.pop("username")
+            session.pop("account")
     return render_template("teacherlogin.html")
 
 @app.route('/adminlogin')
 def admin_login():
     if "username" in session:
-        return redirect(url_for("adminhomepage"))
+        if session["account"] == 'admin':
+            return redirect(url_for("adminhomepage"))
+        else:
+            session.pop("username")
+            session.pop("account")
     return render_template("adminlogin.html")
 
 #############################################################
@@ -46,6 +63,7 @@ def admin_login():
 def logout():
     if "username" in session:
         session.pop("username")
+        session.pop("account")
         return redirect(url_for("root"))
     return render_template("login.html")
 
@@ -56,43 +74,58 @@ def logout():
 def signup():
     if "username" not in session:
         return render_template("signup.html")
-    else:
+    elif session["account"] == 'student':
         flash("you are logged in")
         return redirect(url_for("homepage"))
-
+    else:
+        return redirect(url_for("logout"))
+    
 @app.route('/teachersignup', methods=["GET", "POST"])
 def teachersignup():
     if "username" not in session:
         return render_template("teachers/signup.html")
-    else:
+    elif session["account"] == 'teacher':
         flash("you are logged in")
         return redirect(url_for("teacherhomepage"))
+    else:
+        return redirect(url_for("logout"))
+
+
     
 ###########################################################################
 ################## STUDENT PAGES #########################################
 @app.route('/homepage', methods=["GET","POST"])
 def homepage():
     if "username" in session:
-        username = session["username"]
-        name = db_stuff.get_name_from_student(username)
-        stuid = db_stuff.get_id_from_student(username)
-        osis = db_stuff.get_osis_from_student(username)
-        email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
-        return render_template("home.html", username = session["username"], name = name, email = email, osis = osis, stuid = stuid)
+        if session["account"] == "student":
+            username = session["username"]
+            name = db_stuff.get_name_from_student(username)
+            stuid = db_stuff.get_id_from_student(username)
+            osis = db_stuff.get_osis_from_student(username)
+            email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
+            return render_template("home.html", username = session["username"], name = name, email = email, osis = osis, stuid = stuid)
+        else:
+            return redirect(url_for("logout"))
     return redirect(url_for("auth"))
 
 @app.route('/classes', methods=["GET","POST"])
 def class_page():
     if "username" in session:
-        username = session["username"]
-        return render_template("classes.html", username = session["username"])
+        if session["account"] == "student":
+            username = session["username"]
+            return render_template("classes.html", username = session["username"])
+        else:
+            return redirect(url_for("logout"))
     return redirect(url_for("auth"))
 
 @app.route('/calendar', methods=["GET","POST"])
 def calendar_page():
     if "username" in session:
-        username = session["username"]
-        return render_template("calendar.html", username = session["username"])
+        if session["account"] == "student":
+            username = session["username"]
+            return render_template("calendar.html", username = session["username"])
+        else:
+            return redirect(url_for("logout"))
     return redirect(url_for("auth"))
 
 ###########################################################################
@@ -100,12 +133,15 @@ def calendar_page():
 @app.route('/home', methods=["GET","POST"])
 def teacherhomepage():
     if "username" in session:
-        username = session["username"]
-        # name = db_stuff.get_name_from_student(username)
-        # stuid = db_stuff.get_id_from_student(username)
-        # osis = db_stuff.get_osis_from_student(username)
-        #email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
-        return render_template("teachers/home.html", username = session["username"])
+        if session["account"] == "teacher":
+            username = session["username"]
+            # name = db_stuff.get_name_from_student(username)
+            # stuid = db_stuff.get_id_from_student(username)
+            # osis = db_stuff.get_osis_from_student(username)
+            #email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
+            return render_template("teachers/home.html", username = session["username"])
+        else:
+            return redirect(url_for("logout"))
     return redirect(url_for("teacherauth"))
 
 
@@ -114,12 +150,15 @@ def teacherhomepage():
 @app.route('/adminhome', methods=["GET","POST"])
 def adminhomepage():
     if "username" in session:
-        username = session["username"]
-        # name = db_stuff.get_name_from_student(username)
-        # stuid = db_stuff.get_id_from_student(username)
-        # osis = db_stuff.get_osis_from_student(username)
-        #email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
-        return render_template("admin/home.html", username = session["username"])
+        if session["account"] == "admin":
+            username = session["username"]
+            # name = db_stuff.get_name_from_student(username)
+            # stuid = db_stuff.get_id_from_student(username)
+            # osis = db_stuff.get_osis_from_student(username)
+            #email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
+            return render_template("admin/home.html", username = session["username"])
+        else:
+            return redirect(url_for("logout"))
     return redirect(url_for("adminauth"))
 
 
@@ -128,33 +167,36 @@ def adminhomepage():
 @app.route('/updatestudentpass', methods=["GET","POST"])
 def updatepass():
     if "username" in session:
-        username = session["username"]
-        if request.method == "GET":
-            return redirect("/")
-        try:
-            oldpass = request.form['currentpass']
-            password0 = request.form['pass1']
-            password1 = request.form['pass2']
-        except KeyError:
-            flash("Fill evrything in!")
-            print "Fail0"
-            return redirect(url_for("homepage", error = "Fill everything in!"))
-        if db_stuff.get_pass_from_student(username) != hashlib.sha256(oldpass).hexdigest():
-            flash("Old password is wrong!")
-            print("wrong old")
-            return redirect(url_for("homepage", error = "Old password is not correct."))
-        if password0 != password1:
-            flash("Passwords don't match!")
-            print "Fail1"
-            return redirect(url_for("homepage", error = "New passwords do not match!"))
-        if not min_thres(password0):
-            flash("Password must contain upper- and lowercase letters and at least one number")
-            print "fail2"
-            return redirect(url_for("homepage", error = "New password must contain both upper and lowercase letters, and at least one number."))
-        if db_stuff.change_pass(username, password0):
-            flash("successfully created!")
-            print "success!"
-            return redirect(url_for("logout"))
+        if session["account"] == 'student':
+            username = session["username"]
+            if request.method == "GET":
+                return redirect("/")
+            try:
+                oldpass = request.form['currentpass']
+                password0 = request.form['pass1']
+                password1 = request.form['pass2']
+            except KeyError:
+                flash("Fill evrything in!")
+                print "Fail0"
+                return redirect(url_for("homepage", error = "Fill everything in!"))
+            if db_stuff.get_pass_from_student(username) != hashlib.sha256(oldpass).hexdigest():
+                flash("Old password is wrong!")
+                print("wrong old")
+                return redirect(url_for("homepage", error = "Old password is not correct."))
+            if password0 != password1:
+                flash("Passwords don't match!")
+                print "Fail1"
+                return redirect(url_for("homepage", error = "New passwords do not match!"))
+            if not min_thres(password0):
+                flash("Password must contain upper- and lowercase letters and at least one number")
+                print "fail2"
+                return redirect(url_for("homepage", error = "New password must contain both upper and lowercase letters, and at least one number."))
+            if db_stuff.change_pass(username, password0):
+                flash("successfully created!")
+                print "success!"
+                return redirect(url_for("logout"))
+        else:
+            return redirect(url_for("logout"))        
     return redirect(url_for("auth"))
 ############################################################################
 ##############LOGIN AUTHORIZATION ##########################################
@@ -162,7 +204,10 @@ def updatepass():
 @app.route('/auth', methods=["GET", "POST"])
 def auth():
     if "username" in session:
-        return redirect(url_for("homepage"))
+        if session["account"] == "teacher":
+            return redirect(url_for("homepage"))
+        else:
+            return redirect(url_for("logout"))
     if request.method == "GET":
         return redirect("/")
     try:
@@ -178,6 +223,7 @@ def auth():
     '''
     if db_stuff.auth(username,password):
         session['username'] = username
+        session['account'] = 'student'
         flash("You're logged in!")
         return redirect(url_for("homepage"))
     else:
@@ -188,7 +234,10 @@ def auth():
 @app.route('/teacherauth', methods=["GET", "POST"])
 def teacherauth():
     if "username" in session:
-        return redirect(url_for("homepage"))
+        if session["account"] == "teacher":
+            return redirect(url_for("homepage"))
+        else:
+            return redirect(url_for("logout"))
     if request.method == "GET":
         return redirect("/")
     try:
@@ -206,6 +255,7 @@ def teacherauth():
     #print(hashlib.sha256(password).hexdigest())
     if db_stuff.teacherauth(username,password):
         session['username'] = username
+        session['account'] = 'teacher'
         flash("You're logged in!")
         return redirect(url_for("teacherhomepage"))
     else:
@@ -216,7 +266,10 @@ def teacherauth():
 @app.route('/adminauth', methods=["GET", "POST"])
 def adminauth():
     if "username" in session:
-        return redirect(url_for("adminhomepage"))
+        if session["account"] == 'admin':
+            return redirect(url_for("adminhomepage"))
+        else:
+            return redirect(url_for("logout"))
     if request.method == "GET":
         return redirect("/")
     try:
@@ -234,6 +287,7 @@ def adminauth():
     #print(hashlib.sha256(password).hexdigest())
     if db_stuff.adminauth(username,password):
         session['username'] = username
+        session['account'] = 'admin'
         flash("You're logged in!")
         return redirect(url_for("adminhomepage"))
     else:
@@ -264,7 +318,10 @@ def min_thres(pswd):
 @app.route('/signauth', methods = ["GET", "POST"])
 def signauth():
     if "username" in session:
-        return redirect(url_for("homepage"))
+        if session["account"] == 'student':
+            return redirect(url_for("homepage"))
+        else:
+            return redirect(url_for("logout"))
     if request.method == "GET":
         return redirect("/")
     try:
@@ -299,7 +356,10 @@ def signauth():
 @app.route('/teachersignauth', methods = ["GET", "POST"])
 def teachersignauth():
     if "username" in session:
-        return redirect(url_for("homepage"))
+        if session["account"] == 'teacher':
+            return redirect(url_for("homepage"))
+        else:
+            return redirect(url_for("logout"))
     if request.method == "GET":
         return redirect("/")
     try:
@@ -332,7 +392,12 @@ def teachersignauth():
 
 @app.route('/admin')
 def admin():
-    return render_template('admin/admin.html')
+    if 'username' in session:
+        if session['account'] == 'admin':
+            return render_template('admin/admin.html')
+        else:
+            return redirect(url_for("logout"))
+    return redirect(url_for("root"))
 
 @app.route('/classes')
 def classes():
