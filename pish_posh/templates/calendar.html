@@ -6,16 +6,15 @@ Calendar
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <style>
-<link href="/www.cssscript.com/demo/minimal-clean-inline-date-picker-hello-week/dist/helloweek.css" rel="stylesheet"> </link>
-<script src="/www.cssscript.com/demo/minimal-clean-inline-date-picker-hello-week/dist/helloweek.min.js"></script>
+
+<link href="https://cssscript.com/demo/minimal-clean-inline-date-picker-hello-week/dist/helloweek.css" rel="stylesheet"> </link>
+<script src="static/dist/helloweek.min.js"></script>
 
 
 <!-- http://bl.ocks.org/KathyZ/c2d4694c953419e0509b -->
-
+ <style>
       body {
         font: 1.1em sans-serif;
       }
@@ -105,7 +104,7 @@ Calendar
 </div>
 
 <script>
-const myCalendar = new HelloWeek();
+//const myCalendar = new HelloWeek();
 
 const prev = document.querySelector('.demo-prev');
 const next = document.querySelector('.demo-next');
@@ -147,16 +146,16 @@ function updateInfo() {
   }
 }
 
-const myCalendar = new HelloWeek({
+/*const myCalendar = new HelloWeek({
   onLoad: updateInfo,
   onChange: updateInfo,
   onSelect: updateInfo
-});
+});*/
 
 const myCalendar = new HelloWeek({
       selector: '.hello-week',
       lang: 'en',
-      langFolder: './dist/langs/',
+      langFolder: 'static/dist/langs/',
       format: false,
       weekShort: true,
       monthShort: false,
