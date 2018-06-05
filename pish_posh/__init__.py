@@ -26,12 +26,30 @@ def signup():
         flash("you are logged in")
         return redirect(url_for("homepage"))
 
+###########################################################################
+################## STUDENT PAGES #########################################
 @app.route('/homepage', methods=["GET","POST"])
 def homepage():
     if "username" in session:
         username = session["username"]
         return render_template("home.html", username = session["username"])
     return redirect(url_for("auth"))
+
+@app.route('/classes', methods=["GET","POST"])
+def class_page():
+    if "username" in session:
+        username = session["username"]
+        return render_template("classes.html", username = session["username"])
+    return redirect(url_for("auth"))
+
+@app.route('/calendar', methods=["GET","POST"])
+def calendar_page():
+    if "username" in session:
+        username = session["username"]
+        return render_template("calendar.html", username = session["username"])
+    return redirect(url_for("auth"))
+
+############################################################################
 
 
 @app.route('/auth', methods=["GET", "POST"])

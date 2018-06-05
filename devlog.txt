@@ -62,3 +62,7 @@ Added log.sh to update devlog easier.
 shifrinaD -- 2018-06-04 18:27:34
 Linked bootstrap to online sources to save space.
 
+----------------------------------------------------
+shifrinaD -- 2018-06-04 20:08:22
+Templates for Student Pages<n>Old homepage with calendar and adding classes relocated to oldhome.html in templates<n>Added routes for Calendar, Classes, and updated homepage route to redirect to student profile which is in progress<n>To edit styling of student pages, use resume.min.css in static/home<n>To edit styling of login/sign up, use main.css in static/login
+
