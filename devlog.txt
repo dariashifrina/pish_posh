@@ -87,3 +87,7 @@ added tid to teachers database, commented out calendar stuff because we need to 
 shifrinaD -- 2018-06-05 11:47:32
 Created fxn and pages for adding teachers to database. Karina came up with a way to add values to table with primary keys (check out add_teacher in dbstuff python file)
 
+----------------------------------------------------
+shifrinaD -- 2018-06-05 12:35:16
+Got rid of grades. Linked absence notes to SourJambaJuice's final project
+
