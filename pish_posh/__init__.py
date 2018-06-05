@@ -419,12 +419,13 @@ def adminwork():
     print str(db_stuff.add_work(request.form['CID'], request.form['Wdescr'], request.form['Type'], request.form['Date']))
     return render_template("home.html")
 
-@app.route('/addwork', methods=['POST'])
+@app.route('/addwork', methods=['GET','POST'])
 def addclass():
-    cl = int(request.form['class'])
-    username = session['username']
-    db_stuff.append_class(username,cl)
-    return render_template('microsoftsucks.html')
+    if 'username' in session:
+        username = session['username']
+        return render_template('teachers/addwork.html', username = username)
+    else:
+        return render_template("login.html")
 
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':

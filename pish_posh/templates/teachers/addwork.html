@@ -7,18 +7,20 @@ Add Classes
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% endblock %}
     {% block content %}
-    <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
+     <div class="container-fluid p-0">
+    <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about"> 
+
       <h2 class="mb-5">Add Work To Classes</h2>
-      <p class="mb-5">
-      <form class="" action="/adminclass" method="POST">
-        <br><br><br><br><br><div class="subheading mb-3">Class Name:</div>
-        <input type="text" name="name" value="">
-        <div class="subheading mb-3">TID:</div>
-        <input type="text" name="tid" value="">
-       <div class="subheading mb-3">Students:</div>
-        <input type="text" name="slist" value="[]">
+        <form class="" action="/adminwork" method="POST">
+      <br><br><Br><Br><br><br>
+        <div class="subheading mb-3">Type of Work:</div>
+	<select>
+	  <option value="0"> Assignemnt </option>
+	  <option value="1"> Test </option>
+	</select>
         <div class="subheading mb-3">Description:</div>
-        <input type="text" name="desc" value="">
+        <input type="text" name="wdescr" value="">
         <br><input type="submit"></form>
-      </p>
+      </p> </section>
+{% endblock %}
 </html>
