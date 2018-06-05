@@ -19,6 +19,9 @@ def root():
         return redirect(url_for("homepage"))
     return render_template("index2.html")
 
+############################################################
+###############login for student and teacher ###############
+
 @app.route('/studentlogin')
 def student_login():
     if "username" in session:
@@ -31,12 +34,17 @@ def teacher_login():
         return redirect(url_for("homepage"))
     return render_template("teacherlogin.html")
 
+#############################################################
+###################logout fxn ###############################
 @app.route('/logout')
 def logout():
     if "username" in session:
         session.pop("username")
         return redirect(url_for("root"))
     return render_template("login.html")
+
+##############################################################
+#################signup for student and teacher ##############
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
@@ -46,6 +54,14 @@ def signup():
         flash("you are logged in")
         return redirect(url_for("homepage"))
 
+@app.route('/teachersignup', methods=["GET", "POST"])
+def teachersignup():
+    if "username" not in session:
+        return render_template("teachers/signup.html")
+    else:
+        flash("you are logged in")
+        return redirect(url_for("teacherhomepage"))
+    
 ###########################################################################
 ################## STUDENT PAGES #########################################
 @app.route('/homepage', methods=["GET","POST"])
@@ -195,7 +211,8 @@ def min_thres(pswd):
     num = 1 in N
     return upper and lower and num
 
-
+##################################################################################
+########### Adding accounts for students and teachers ###########################
 @app.route('/signauth', methods = ["GET", "POST"])
 def signauth():
     if "username" in session:
@@ -229,6 +246,41 @@ def signauth():
     else:
         flash("username exists")
         return render_template("signup.html", error = "Username already exists.")
+
+
+@app.route('/teachersignauth', methods = ["GET", "POST"])
+def teachersignauth():
+    if "username" in session:
+        return redirect(url_for("homepage"))
+    if request.method == "GET":
+        return redirect("/")
+    try:
+        name = request.form['name']
+        lastname = request.form['name2']
+        username = request.form['username']
+        password0 = request.form['password0']
+        password1 = request.form['password1']
+    except KeyError:
+        flash("Fill evrything in!")
+        print "Fail0"
+        return render_template("teachers/signup.html", error = "Fill in all fields.")
+    if password0 != password1:
+        flash("Passwords don't match!")
+        print "Fail1"
+        return render_template("teachers/signup.html", error = "Passwords do not match.")
+    if not min_thres(password0):
+        flash("Password must contain upper- and lowercase letters and at least one number")
+        print "fail2"
+        return render_template("teachers/signup.html", error = "Passwords must contain both upper and lowercase letters, and at least one number.")
+    if db_stuff.add_teacher(name, lastname, username, password0):
+        flash("successfully created!")
+        print "sucess!"
+        return redirect(url_for("homepage"))
+    else:
+        flash("username exists")
+        return render_template("teachers/signup.html", error = "Username already exists.")
+    
+####################################################################################################
 
 @app.route('/admin')
 def admin():

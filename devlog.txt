@@ -83,3 +83,7 @@ Began work on teacher part of site. Changed teacher database to reflect new sche
 ionkinaK -- 2018-06-05 11:07:19
 added tid to teachers database, commented out calendar stuff because we need to implement a better one
 
+----------------------------------------------------
+shifrinaD -- 2018-06-05 11:47:32
+Created fxn and pages for adding teachers to database. Karina came up with a way to add values to table with primary keys (check out add_teacher in dbstuff python file)
+
