@@ -3,6 +3,7 @@ import os
 from os import path
 import sqlite3
 import db_stuff
+import hashlib
 
 
 app = Flask(__name__)
@@ -32,7 +33,11 @@ def signup():
 def homepage():
     if "username" in session:
         username = session["username"]
-        return render_template("home.html", username = session["username"])
+        name = db_stuff.get_name_from_student(username)
+        stuid = db_stuff.get_id_from_student(username)
+        osis = db_stuff.get_osis_from_student(username)
+        email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
+        return render_template("home.html", username = session["username"], name = name, email = email, osis = osis, stuid = stuid)
     return redirect(url_for("auth"))
 
 @app.route('/classes', methods=["GET","POST"])
@@ -50,7 +55,39 @@ def calendar_page():
     return redirect(url_for("auth"))
 
 ############################################################################
-
+################# STUDENT ACTIONS ##########################################
+@app.route('/updatestudentpass', methods=["GET","POST"])
+def updatepass():
+    if "username" in session:
+        username = session["username"]
+        if request.method == "GET":
+            return redirect("/")
+        try:
+            oldpass = request.form['currentpass']
+            password0 = request.form['pass1']
+            password1 = request.form['pass2']
+        except KeyError:
+            flash("Fill evrything in!")
+            print "Fail0"
+            return redirect("/")
+        if db_stuff.get_pass_from_student(username) != hashlib.sha256(oldpass).hexdigest():
+            flash("Old password is wrong!")
+            print("wrong old")
+            return redirect(url_for("homepage", error = "Old password is not correct."))
+        if password0 != password1:
+            flash("Passwords don't match!")
+            print "Fail1"
+            return redirect(url_for("homepage", error = "New passwords do not match!"))
+        if not min_thres(password0):
+            flash("Password must contain upper- and lowercase letters and at least one number")
+            print "fail2"
+            return redirect(url_for("homepage", error = "New password must contain both upper and lowercase letters, and at least one number."))
+        if db_stuff.change_pass(username, password0):
+            flash("successfully created!")
+            print "success!"
+            return redirect(url_for("homepage"))
+    return redirect(url_for("auth"))
+############################################################################
 
 @app.route('/auth', methods=["GET", "POST"])
 def auth():
@@ -103,6 +140,7 @@ def signauth():
         return redirect("/")
     try:
         name = request.form['name']
+        lastname = request.form['name2']
         username = request.form['username']
         password0 = request.form['password0']
         password1 = request.form['password1']
@@ -120,7 +158,7 @@ def signauth():
         flash("Password must contain upper- and lowercase letters and at least one number")
         print "fail2"
         return render_template("signup.html", error = "Passwords must contain both upper and lowercase letters, and at least one number.")
-    if db_stuff.add_student(name,username, password0, osis, sid):
+    if db_stuff.add_student(name, lastname, username, password0, osis, sid):
         flash("successfully created!")
         print "sucess!"
         return redirect(url_for("homepage"))

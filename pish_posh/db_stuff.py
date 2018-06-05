@@ -14,7 +14,7 @@ def user_tables():
     db.close()
 '''
 
-def add_student(name, username, password, osis, sid):
+def add_student(name, lastname, username, password, osis, sid):
 #    user_tables()
     db = sqlite3.connect(DB)
     c = db.cursor()
@@ -23,7 +23,7 @@ def add_student(name, username, password, osis, sid):
     id = get_id('students','SID')
     if not check.fetchone():
         new_pass = hashlib.sha256(password).hexdigest()
-        c.execute('INSERT INTO students VALUES (?,?,?,?,?)', (name, username, new_pass, osis, sid))
+        c.execute('INSERT INTO students VALUES (?,?,?,?,?,?)', (name,lastname, username, new_pass, osis, sid))
         c.execute('INSERT INTO student_info VALUES (?, ?)', (sid, '[]'))
         db.commit()
         db.close()
@@ -59,6 +59,15 @@ def add_work(cid, wdescr, type, date):
     db.close()
     return True
 
+def change_pass(username, password0):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    comm = 'UPDATE students SET password = ? WHERE username = ?'
+    c.execute(comm, (hashlib.sha256(password0).hexdigest(), username))
+    db.commit()
+    db.close()
+    return True
+    
 def get_id_from_student(username):
     db = sqlite3.connect(DB)
     c = db.cursor()
@@ -67,9 +76,49 @@ def get_id_from_student(username):
     ret = None
     for q in check:
         ret = q
-    id = ret[4]
+    id = ret[5]
     db.close()
     return id
+
+def get_name_from_student(username):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM students WHERE username = ?'
+    check = c.execute(query, (username,))
+    ret = None
+    for q in check:
+        ret = q
+    fname = ret[0]
+    lname = ret[1]
+    name = []
+    name.append(fname)
+    name.append(lname)
+    db.close()
+    return name
+
+def get_pass_from_student(username):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM students WHERE username = ?'
+    check = c.execute(query, (username,))
+    ret = None
+    for q in check:
+        ret = q
+    password = ret[3]
+    db.close()
+    return password
+
+def get_osis_from_student(username):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM students WHERE username = ?'
+    check = c.execute(query, (username,))
+    ret = None
+    for q in check:
+        ret = q
+    osis = ret[4]
+    db.close()
+    return osis
 
 def get_classes_from_id(sid):
     db = sqlite3.connect(DB)
