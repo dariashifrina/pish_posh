@@ -193,7 +193,7 @@ def auth(username, password):
 #add_student('Karina', 'kionkina', 'Boop1', 209853738, 4193)
 
 #######teachers DB FXNS##########################################
-def add_teacher(firstname, lastname, username, password):
+def add_teacher(tid, firstname, lastname, username, password):
 #    user_tables()
     db = sqlite3.connect(DB)
     c = db.cursor()
@@ -201,7 +201,7 @@ def add_teacher(firstname, lastname, username, password):
     check = c.execute(query, (username,))
     if not check.fetchone():
         new_pass = hashlib.sha256(password).hexdigest()
-        c.execute('INSERT INTO teachers VALUES (?,?,?,?,?)', (firstname,lastname, username, password, ""))
+        c.execute('INSERT INTO teachers VALUES (?,?,?,?,?,?)', (tid,firstname,lastname, username, password, ""))
 #        c.execute('INSERT INTO student_info VALUES (?, ?)', (sid, '[]'))
         db.commit()
         db.close()
