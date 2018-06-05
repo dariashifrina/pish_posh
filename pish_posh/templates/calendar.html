@@ -152,7 +152,7 @@ function updateInfo() {
   if (this.today) {
     today.innerHTML = '';
     var li = document.createElement('li');
-    li.innerHTML = this.today;
+    li.innerHTML = timeConverter(this.today);
     today.appendChild(li);
   }
 
@@ -161,13 +161,13 @@ function updateInfo() {
     picked.innerHTML = '';
     for (days of this.selectedDays) {
       var li = document.createElement('li');
-      li.innerHTML = days;
+      li.innerHTML = timeConverter(days);
       picked.appendChild(li);
     }
 
     last.innerHTML = '';
     var li = document.createElement('li');
-    li.innerHTML = this.lastSelectedDay;
+    li.innerHTML = timeConverter(this.lastSelectedDay);
     last.appendChild(li);
   }
 }
