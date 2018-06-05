@@ -19,8 +19,8 @@ def root():
         return redirect(url_for("homepage"))
     return render_template("index2.html")
 
-############################################################
-###############login for student and teacher ###############
+###############################################################
+###############login for student,teacher, admin ###############
 
 @app.route('/studentlogin')
 def student_login():
@@ -33,6 +33,12 @@ def teacher_login():
     if "username" in session:
         return redirect(url_for("homepage"))
     return render_template("teacherlogin.html")
+
+@app.route('/adminlogin')
+def admin_login():
+    if "username" in session:
+        return redirect(url_for("homepage"))
+    return render_template("adminlogin.html")
 
 #############################################################
 ###################logout fxn ###############################
@@ -101,6 +107,20 @@ def teacherhomepage():
         #email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
         return render_template("teachers/home.html", username = session["username"])
     return redirect(url_for("teacherauth"))
+
+
+###########################################################################
+##################### ADMINPAGES #########################################
+@app.route('/adminhome', methods=["GET","POST"])
+def adminhomepage():
+    if "username" in session:
+        username = session["username"]
+        # name = db_stuff.get_name_from_student(username)
+        # stuid = db_stuff.get_id_from_student(username)
+        # osis = db_stuff.get_osis_from_student(username)
+        #email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
+        return render_template("admin/home.html", username = session["username"])
+    return redirect(url_for("adminauth"))
 
 
 ############################################################################
@@ -191,6 +211,34 @@ def teacherauth():
     else:
         flash("oops! Login failed...")
         return render_template("teacherlogin.html", error = "Wrong credentials. Please try again.")
+    #redirect(url_for('root'))
+
+@app.route('/adminauth', methods=["GET", "POST"])
+def adminauth():
+    if "username" in session:
+        return redirect(url_for("adminhomepage"))
+    if request.method == "GET":
+        return redirect("/")
+    try:
+        username = request.form['username']
+        password = request.form['password']
+        #osis = request.form['osis']
+        #student_id = request.form['student_id']
+    except KeyError:
+        flash("Please fill everything in!")
+        return render_template("adminlogin.html", error = "Please fill everything in!")
+    '''
+    db authentication
+    '''
+    #print(username)
+    #print(hashlib.sha256(password).hexdigest())
+    if db_stuff.adminauth(username,password):
+        session['username'] = username
+        flash("You're logged in!")
+        return redirect(url_for("adminhomepage"))
+    else:
+        flash("oops! Login failed...")
+        return render_template("adminlogin.html", error = "Wrong credentials. Please try again.")
     #redirect(url_for('root'))
 
 

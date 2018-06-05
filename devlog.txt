@@ -91,3 +91,7 @@ Created fxn and pages for adding teachers to database. Karina came up with a way
 shifrinaD -- 2018-06-05 12:35:16
 Got rid of grades. Linked absence notes to SourJambaJuice's final project
 
+----------------------------------------------------
+shifrinaD -- 2018-06-05 13:09:13
+Added admin login + homepage for admin.
+

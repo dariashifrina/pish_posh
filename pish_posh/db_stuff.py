@@ -221,3 +221,16 @@ def teacherauth(username, password):
     print ret
     db.close()
     return ret
+
+#######admin DB FXNS##########################################
+
+def adminauth(username, password):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    passs = hashlib.sha256(password).hexdigest()
+    query = 'SELECT password FROM admins WHERE username = ? AND password = ?'
+    check = c.execute(query, (username, passs))
+    ret = check.fetchone()
+    print ret
+    db.close()
+    return ret
