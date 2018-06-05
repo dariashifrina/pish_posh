@@ -103,3 +103,7 @@ Fix on student change password.
 shifrinaD -- 2018-06-05 13:44:35
 Implemented adding classes for admin.
 
+----------------------------------------------------
+shifrinaD -- 2018-06-05 19:59:50
+Connected adding assignments to front-end for teachers.
+

@@ -249,6 +249,6 @@ def get_classes_from_teacher(username):
     tid = get_tid_from_teacher(username)
     query = "SELECT CID FROM classes where TID = '" + str(tid) + "'"
     classes = c.execute(query).fetchall()
-    return classes[0][0]
+    return classes[0]
 
 print get_classes_from_teacher('tbm')
