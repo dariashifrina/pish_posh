@@ -64,7 +64,11 @@ Linked bootstrap to online sources to save space.
 
 ----------------------------------------------------
 shifrinaD -- 2018-06-04 20:08:22
-Templates for Student Pages<n>Old homepage with calendar and adding classes relocated to oldhome.html in templates<n>Added routes for Calendar, Classes, and updated homepage route to redirect to student profile which is in progress<n>To edit styling of student pages, use resume.min.css in static/home<n>To edit styling of login/sign up, use main.css in static/login
+Templates for Student Pages
+Old homepage with calendar and adding classes relocated to oldhome.html in templates
+Added routes for Calendar, Classes, and updated homepage route to redirect to student profile which is in progress
+To edit styling of student pages, use resume.min.css in static/home
+To edit styling of login/sign up, use main.css in static/login
 
 ----------------------------------------------------
 shifrinaD -- 2018-06-04 21:28:42
