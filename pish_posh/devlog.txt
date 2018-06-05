@@ -1,0 +1,3 @@
+ionkinaK -- 2018-06-05 11:04:30
+added tid to teachers database, commented out calendar stuff because we need to implement a better one
+
