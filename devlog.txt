@@ -95,3 +95,7 @@ Got rid of grades. Linked absence notes to SourJambaJuice's final project
 shifrinaD -- 2018-06-05 13:09:13
 Added admin login + homepage for admin.
 
+----------------------------------------------------
+shifrinaD -- 2018-06-05 13:29:05
+Fix on student change password.
+

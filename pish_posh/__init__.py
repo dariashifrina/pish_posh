@@ -138,7 +138,7 @@ def updatepass():
         except KeyError:
             flash("Fill evrything in!")
             print "Fail0"
-            return redirect("/")
+            return redirect(url_for("homepage", error = "Fill everything in!"))
         if db_stuff.get_pass_from_student(username) != hashlib.sha256(oldpass).hexdigest():
             flash("Old password is wrong!")
             print("wrong old")
@@ -154,7 +154,7 @@ def updatepass():
         if db_stuff.change_pass(username, password0):
             flash("successfully created!")
             print "success!"
-            return redirect(url_for("homepage"))
+            return redirect(url_for("logout"))
     return redirect(url_for("auth"))
 ############################################################################
 ##############LOGIN AUTHORIZATION ##########################################
@@ -332,7 +332,7 @@ def teachersignauth():
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    return render_template('admin/admin.html')
 
 @app.route('/classes')
 def classes():
