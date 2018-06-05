@@ -148,11 +148,17 @@ const today = document.querySelector('.demo-today');
 const picked = document.querySelector('.demo-picked');
 const last = document.querySelector('.demo-last');
 
+
+
+      
+
+
 function updateInfo() {
   if (this.today) {
     today.innerHTML = '';
     var li = document.createElement('li');
-    li.innerHTML = timeConverter(this.today);
+    console.log(this.today);
+    li.innerHTML = db(this.today);
     today.appendChild(li);
   }
 
@@ -215,13 +221,32 @@ function timeConverter(UNIX_timestamp){
   var a = new Date(UNIX_timestamp * 1000);
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var year = a.getFullYear();
-  var month = months[a.getMonth()];
+  var month = months[a.getMonth()]; 
   var date = a.getDate();
   var hour = a.getHours();
   var min = a.getMinutes();
   var sec = a.getSeconds();
   var time = date + ' ' + month + ' ' + year;
   return time;
+/** db time =   var time = date + ' ' + a.getMonth() + ' ' + year + ' ' + hour + ':' + min + ':' + sec ; */
+}
+
+
+function db(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var year = a.getFullYear();
+  var date = a.getDate();
+  var month = a.getMonth();
+  if (date < 10){
+	      date = "0" + date;}
+  if (month < 10){
+	      month = "0" + month;}
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = date  + month  + year;
+  return time;
+
 }
 
 </script>
