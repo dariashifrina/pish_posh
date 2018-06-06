@@ -111,3 +111,7 @@ Connected adding assignments to front-end for teachers.
 shifrinaD -- 2018-06-05 20:06:23
 minor fixes on teacher sidebar
 
+----------------------------------------------------
+higginsH -- 2018-06-05 20:31:51
+fixed mailto and logout
+
