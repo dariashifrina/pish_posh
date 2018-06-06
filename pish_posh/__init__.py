@@ -64,8 +64,8 @@ def logout():
     if "username" in session:
         session.pop("username")
         session.pop("account")
-        return redirect(url_for("root"))
-    return render_template("login.html")
+    return redirect(url_for("root"))
+
 
 ##############################################################
 #################signup for student and teacher ##############
