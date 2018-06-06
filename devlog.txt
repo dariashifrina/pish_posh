@@ -115,3 +115,7 @@ minor fixes on teacher sidebar
 higginsH -- 2018-06-05 20:31:51
 fixed mailto and logout
 
+----------------------------------------------------
+shifrinaD -- 2018-06-05 21:28:57
+Added function to retrieve teacher classes. Will need to add it to class template.
+

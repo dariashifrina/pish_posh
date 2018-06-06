@@ -142,6 +142,17 @@ def teacherhomepage():
             return redirect(url_for("logout"))
     return redirect(url_for("teacherauth"))
 
+@app.route('/teacherclasses', methods=["GET","POST"])
+def teacher_class_page():
+    if "username" in session:
+        if session["account"] == "teacher":
+            username = session["username"]
+            classes = db_stuff.get_classinfo_from_teacher(username)
+            print classes
+            return render_template("teachers/teacherclasses.html", username = session["username"])
+        else:
+            return redirect(url_for("logout"))
+    return redirect(url_for("teacherauth"))
 
 ###########################################################################
 ##################### ADMINPAGES #########################################

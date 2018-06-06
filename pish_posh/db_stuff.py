@@ -1,6 +1,7 @@
 import sqlite3
 import hashlib
 import json
+import ast
 
 DB = "pish.db"
 
@@ -266,5 +267,26 @@ def get_classes_from_teacher(username):
     query = "SELECT CID FROM classes where TID = '" + str(tid) + "'"
     classes = c.execute(query).fetchall()
     return classes[0]
+
+def get_classinfo_from_teacher(username):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    tid = get_tid_from_teacher(username)
+    query = "SELECT * FROM classes WHERE TID = '" + str(tid) + "'"
+    #classes = c.execute(query, (username))
+    classes = c.execute(query).fetchall()
+    students2 = ast.literal_eval(classes[0][3])
+    students = []
+    for student in students2:
+        query2 = "SELECT username FROM students WHERE SID = '" + str(student) + "'"
+        students.append(c.execute(query2).fetchall())
+    print students
+    name = classes[0][1]
+    description = classes[0][4]
+    info = []
+    info.append(name)
+    info.append(description)
+    info.append(students)
+    return info
 
 print get_classes_from_teacher('tbm')
