@@ -133,11 +133,11 @@ def teacherhomepage():
     if "username" in session:
         if session["account"] == "teacher":
             username = session["username"]
-            # name = db_stuff.get_name_from_student(username)
+            name = db_stuff.get_name_from_teacher(username)
             # stuid = db_stuff.get_id_from_student(username)
             # osis = db_stuff.get_osis_from_student(username)
             #email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
-            return render_template("teachers/home.html", username = session["username"])
+            return render_template("teachers/home.html", username = session["username"], name = name)
         else:
             return redirect(url_for("logout"))
     return redirect(url_for("teacherauth"))

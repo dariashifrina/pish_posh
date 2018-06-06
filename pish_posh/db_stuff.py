@@ -222,6 +222,22 @@ def teacherauth(username, password):
     db.close()
     return ret
 
+def get_name_from_teacher(username):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM teachers WHERE username = ?'
+    check = c.execute(query, (username,))
+    ret = None
+    for q in check:
+        ret = q
+    fname = ret[2]
+    lname = ret[3]
+    name = []
+    name.append(fname)
+    name.append(lname)
+    db.close()
+    return name
+
 #######admin DB FXNS##########################################
 
 def adminauth(username, password):
