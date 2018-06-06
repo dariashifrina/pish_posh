@@ -68,7 +68,7 @@ def change_pass(username, password0):
     db.commit()
     db.close()
     return True
-    
+
 def get_id_from_student(username):
     db = sqlite3.connect(DB)
     c = db.cursor()
@@ -264,9 +264,15 @@ def get_classes_from_teacher(username):
     db = sqlite3.connect(DB)
     c = db.cursor()
     tid = get_tid_from_teacher(username)
-    query = "SELECT CID FROM classes where TID = '" + str(tid) + "'"
-    classes = c.execute(query).fetchall()
-    return classes[0]
+    print tid
+    query = "SELECT * FROM classes where TID = '" + str(tid) + "'"
+    print query
+    classes = c.execute(query)
+    ret = []
+    for iter in classes:
+        ret.append({'CID':iter[0],'name':iter[1]})
+
+    return ret
 
 def get_classinfo_from_teacher(username):
     db = sqlite3.connect(DB)

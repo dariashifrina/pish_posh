@@ -435,6 +435,7 @@ def addwork():
     if 'username' in session:
         username = session['username']
         list_of_classes = db_stuff.get_classes_from_teacher(username)
+        print 'hi'
         print list_of_classes
         return render_template('teachers/addwork.html', username = username, classes = list_of_classes)
     else:
