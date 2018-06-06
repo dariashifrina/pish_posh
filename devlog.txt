@@ -107,3 +107,7 @@ Implemented adding classes for admin.
 shifrinaD -- 2018-06-05 19:59:50
 Connected adding assignments to front-end for teachers.
 
+----------------------------------------------------
+shifrinaD -- 2018-06-05 20:06:23
+minor fixes on teacher sidebar
+
