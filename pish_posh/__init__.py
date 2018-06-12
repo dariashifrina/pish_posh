@@ -112,7 +112,6 @@ def class_page():
         if session["account"] == "student":
             username = session["username"]
             classes = db_stuff.get_classes_and_teacher_from_student(username)
-            print classes
             return render_template("classes.html", username = session["username"], classes=classes)
         else:
             return redirect(url_for("logout"))
@@ -150,7 +149,6 @@ def teacher_class_page():
         if session["account"] == "teacher":
             username = session["username"]
             classes = db_stuff.get_classinfo_from_teacher(username)
-            print classes
             return render_template("teachers/teacherclasses.html", username = session["username"])
         else:
             return redirect(url_for("logout"))
@@ -437,13 +435,16 @@ def addwork():
     if 'username' in session:
         username = session['username']
         list_of_classes = db_stuff.get_classes_from_teacher(username)
-        print 'hi'
-        print list_of_classes
         return render_template('teachers/addwork.html', username = username, classes = list_of_classes)
     else:
         return render_template("login.html")
 
-
+@app.route('/addclass', methods=['GET', 'POST'])
+def addclass():
+    username=session['username']
+    cl=int(request.form['class'])
+    added = db_stuff.append_class(username,cl)
+    return redirect('/classes')
 
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':

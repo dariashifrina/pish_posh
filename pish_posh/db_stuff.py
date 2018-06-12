@@ -41,7 +41,6 @@ def get_id(table, param='CID'): #autmatically detects a new id
     id = 0;
     for iter in ids:
         id+=1
-    print id
 
 def add_class(name, tid, slist, desc):
     db = sqlite3.connect(DB)
@@ -126,7 +125,6 @@ def get_classes_from_id(sid):
     c = db.cursor()
     query = 'SELECT * FROM student_info WHERE SID = ?'
     check = c.execute(query, (sid,))
-    print check
     ret = None
     try:
         for q in check:
@@ -142,7 +140,6 @@ def get_teacher_from_id(sid):
     c = db.cursor()
     query = 'SELECT * FROM teachers WHERE TID = ?'
     check = c.execute(query, (sid,))
-    print check
     ret = None
     try:
         for q in check:
@@ -177,7 +174,24 @@ def append_class(username, cl):
     olst = json.loads(orig)
     olst.append(cl)
     nlist = json.dumps(olst)
-    update_classes(id, nlist)
+    try:
+        r = is_student_in_class(id, cl)
+        if r:
+            update_classes(id, nlist)
+        return r
+    except:
+        return False
+
+def is_student_in_class(id,cl):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM classes WHERE CID = ?'
+    ans = c.execute(query, (cl,))
+    for thing in ans:
+        return id in json.loads(thing[3])
+    db.close()
+    return false
+
 
 def update_classes(id, ncl):
     db = sqlite3.connect(DB)
@@ -199,7 +213,6 @@ def get_classes_and_teacher_from_student(username):
     clist = get_classes_from_id(id)
     lst = json.loads(clist)
     class_list = get_classes_from_list(lst)
-    print class_list
     return add_teachers_to_classes(class_list)
 
 def add_teachers_to_classes(lst):
@@ -276,7 +289,6 @@ def adminauth(username, password):
     query = 'SELECT password FROM admins WHERE username = ? AND password = ?'
     check = c.execute(query, (username, passs))
     ret = check.fetchone()
-    print ret
     db.close()
     return ret
 
@@ -312,7 +324,6 @@ def get_classinfo_from_teacher(username):
     for student in students2:
         query2 = "SELECT username FROM students WHERE SID = '" + str(student) + "'"
         students.append(c.execute(query2).fetchall())
-    print students
     name = classes[0][1]
     description = classes[0][4]
     info = []
