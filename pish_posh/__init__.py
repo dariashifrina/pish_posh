@@ -427,10 +427,13 @@ def adminclass():
 
 @app.route('/teacherwork', methods=['GET', 'POST'])
 def teacherwork():
-    print request.form['chooseclass']
-    db_stuff.add_work(request.form['wdescr'], request.form['type'], request.form['month'], request.form['day'], request.form['year'])
-    print "done"
-    return redirect(url_for("teacherhomepage"))
+    if 'username' in session:
+        cid = request.form['chooseclass']
+        db_stuff.add_work(cid, request.form['wdescr'], request.form['type'], request.form['month'], request.form['day'], request.form['year'])
+        
+        return redirect(url_for("teacherhomepage"))
+    else:
+        redirect(url_for("teacher_login"))
 
 @app.route('/addwork', methods=['GET','POST'])
 def addwork():
@@ -439,7 +442,7 @@ def addwork():
         list_of_classes = db_stuff.get_classes_from_teacher(username)
         return render_template('teachers/addwork.html', username = username, classes = list_of_classes)
     else:
-        return render_template("teachers/home.html")
+        return redirect(url_for("teacher_login"))
 
 @app.route('/addclass', methods=['GET', 'POST'])
 def addclass():
