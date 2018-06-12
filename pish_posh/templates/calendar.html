@@ -155,6 +155,7 @@ const last = document.querySelector('.demo-last');
 
 
 
+
 function updateInfo() {
   if (this.today) {
     today.innerHTML = '';
@@ -179,12 +180,6 @@ function updateInfo() {
     last.appendChild(li);
   }
 }
-
-/*const myCalendar = new HelloWeek({
-  onLoad: updateInfo,
-  onChange: updateInfo,
-  onSelect: updateInfo
-});*/
 
 const myCalendar = new HelloWeek({
       selector: '.hello-week',

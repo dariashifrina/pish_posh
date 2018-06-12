@@ -425,10 +425,15 @@ def adminclass():
     print str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['desc']))
     return render_template('expression')
 
-@app.route('/teacherwork', methods=['POST'])
+@app.route('/teacherwork', methods=['GET', 'POST'])
 def teacherwork():
-    print str(db_stuff.add_work(request.form['CID'], request.form['Wdescr'], request.form['Type'], request.form['Date']))
-    return render_template("home.html")
+    if 'username' in session:
+        cid = request.form['chooseclass']
+        db_stuff.add_work(cid, request.form['wdescr'], request.form['type'], request.form['month'], request.form['day'], request.form['year'])
+        
+        return redirect(url_for("teacherhomepage"))
+    else:
+        redirect(url_for("teacher_login"))
 
 @app.route('/addwork', methods=['GET','POST'])
 def addwork():
@@ -437,7 +442,7 @@ def addwork():
         list_of_classes = db_stuff.get_classes_from_teacher(username)
         return render_template('teachers/addwork.html', username = username, classes = list_of_classes)
     else:
-        return render_template("login.html")
+        return redirect(url_for("teacher_login"))
 
 @app.route('/addclass', methods=['GET', 'POST'])
 def addclass():
@@ -456,3 +461,15 @@ if __name__ == '__main__':
     #app.secret_key = os.urandom(32)
     app.debug = True #DANGER DANGER! Set to FALSE before deployment!
     app.run()
+
+#view assignments page
+@app.route("/va", methods=['POST'])
+def va():
+    if 'username' in session:
+        print "running..."
+        cid = request.form['cid']
+        print cid
+        db_stuff.work_from_cid(cid)
+        return redirect(url_for("homepage"))
+    else:
+        return redirect(url_for('student_login'))

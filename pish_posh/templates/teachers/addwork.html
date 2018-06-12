@@ -11,7 +11,7 @@ Add Classes
     <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
       <h2 class="mb-5">Add Work To Classes</h2>
 
-        <form action="/addassignments" method="POST" class="" text>
+        <form class="" action="/teacherwork" method="POST">
       <br><br><Br><Br><br><br>
           <div class="subheading mb-3">
               Class name:
@@ -20,10 +20,9 @@ Add Classes
               <option value="{{ class.CID }}">{{ class.name }}</option>
                       {{ class|e }}
               {% endfor %}
-          </select></div>
-        <div class="subheading mb-3">Type of Work:
-
-	<select>
+          </select>
+        <div class="subheading mb-3">Type of Work:</div>
+	<select name="type">
 	  <option value="0"> Assignment </option>
 	  <option value="1"> Test </option></div>
 	</select>

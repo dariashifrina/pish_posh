@@ -24,13 +24,24 @@ Classes
                  <div class="resume-content mr-auto">
                    <h3 class="mb-0">{{ class[1] }}</h3>
                    <div class="subheading mb-3">{{ class[2] }}</div>
-                   <p><a href="#">View assignments</a><br>
-             <a href="#">Contact teacher</a></p>
-                 </div>
+		
+		     
+
+            
+                 </div> 		
                  <div class="resume-date text-md-right">
                    <span class="text-primary">{{ class[4] }}</span>
-                 </div>
+           
+
+   <form class="" action="/va" method="POST">
+		     <input type="hidden" name="cid" value="{{class[0]}}">
+		     </input> <br>
+       <p><input type="submit" value="View Assignments"><br> </input>
+     </form>
+      </div>
      </div>
+
+
 {% endfor %}
 
 <!--IN PROGRESS
