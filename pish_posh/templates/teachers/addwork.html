@@ -11,7 +11,7 @@ Add Classes
     <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
       <h2 class="mb-5">Add Work To Classes</h2>
 
-        <form class="" action="/adminwork" method="POST">
+        <form class="" action="/teacherwork" method="POST">
       <br><br><Br><Br><br><br>
           <select name="chooseclass">
               {% for class in classes %}
@@ -20,13 +20,36 @@ Add Classes
               {% endfor %}
           </select>
         <div class="subheading mb-3">Type of Work:</div>
-	<select>
+	<select name="type">
 	  <option value="0"> Assignment </option>
 	  <option value="1"> Test </option>
 	</select>
-        <div class="subheading mb-3">Description:</div>
+
+
+	<div class="subheading mb-3">Due Date:</div>
+	Month:
+	<select name = "month">
+	  {% for i in range(1, 13) %}
+	  <option value="{{i}}"> {{i}} </option>
+	  {% endfor %}
+	</select>
+	Day:
+	<select name = "day">
+	  {% for i in range(1, 32) %}
+	  <option value="{{i}}"> {{i}} </option>
+
+	  {% endfor %}
+	</select>
+        Year:
+	<select name = "year">
+	  <option value="2018"> 2018 </option>
+	  <option value="2019"> 2019 </option>
+	</select>
+
+	<div class="subheading mb-3">Description:</div>
         <input type="text" name="wdescr" value="">
         <br><input type="submit"></form>
+	
     </p>
 {% endblock %}
 </html>

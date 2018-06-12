@@ -333,3 +333,11 @@ def get_classinfo_from_teacher(username):
     return info
 
 print get_classes_from_teacher('tbm')
+
+
+def add_work(desc, type, month, date, year):
+    print desc
+    print type
+    print month
+    print date
+    print year
