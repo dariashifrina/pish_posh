@@ -5,15 +5,15 @@ import ast
 
 DB = "pish.db"
 
-'''
-def user_tables():
-    db = sqlite3.connect(DB)
-    c = db.cursor()
-    c.execute("CREATE TABLE IF NOT EXISTS students (username TEXT, password TEXT, osis INTEGER, student_id INTEGER, user_id INTEGER PRIMARY KEY)")
-    c.execute("CREATE TABLE IF NOT EXISTS teachers (username TEXT, password TEXT, user_id INTEGER PRIMARY KEY)")
-    db.commit()
-    db.close()
-'''
+
+#def user_tables():
+#    db = sqlite3.connect(DB)
+#    c = db.cursor()
+#    c.execute("CREATE TABLE IF NOT EXISTS students (username TEXT, password TEXT, osis INTEGER, student_id INTEGER, user_id INTEGER PRIMARY KEY)")
+#    c.execute("CREATE TABLE IF NOT EXISTS teachers (username TEXT, password TEXT, user_id INTEGER PRIMARY KEY)")
+#    db.commit()
+#    db.close()
+
 #################students DB FXNS#################################
 def add_student(name, lastname, username, password, osis, sid):
 #    user_tables()

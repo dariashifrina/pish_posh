@@ -111,7 +111,9 @@ def class_page():
     if "username" in session:
         if session["account"] == "student":
             username = session["username"]
-            return render_template("classes.html", username = session["username"])
+            classes = db_stuff.get_classes_from_student(username)
+            print classes
+            return render_template("classes.html", username = session["username"], classes=classes)
         else:
             return redirect(url_for("logout"))
     return redirect(url_for("auth"))
@@ -408,7 +410,7 @@ def admin():
             return redirect(url_for("logout"))
     return redirect(url_for("root"))
 
-@app.route('/classes')
+@app.route('/classes2')
 def classes():
     if "username" not in session:
         return redirect(url_for("auth"))
