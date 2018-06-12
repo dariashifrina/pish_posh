@@ -11,6 +11,8 @@ Calendar
 
 <link href="https://cssscript.com/demo/minimal-clean-inline-date-picker-hello-week/dist/helloweek.css" rel="stylesheet"> </link>
 <script src="static/dist/helloweek.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="static/calendard3.js" charset="utf-8"></script>
 
 
 <!-- http://bl.ocks.org/KathyZ/c2d4694c953419e0509b -->
@@ -150,7 +152,7 @@ const last = document.querySelector('.demo-last');
 
 
 
-      
+
 
 
 function updateInfo() {
@@ -221,7 +223,7 @@ function timeConverter(UNIX_timestamp){
   var a = new Date(UNIX_timestamp * 1000);
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var year = a.getFullYear();
-  var month = months[a.getMonth()]; 
+  var month = months[a.getMonth()];
   var date = a.getDate();
   var hour = a.getHours();
   var min = a.getMinutes();
@@ -248,7 +250,6 @@ function db(UNIX_timestamp){
   return time;
 
 }
-
 </script>
 
 

@@ -446,6 +446,11 @@ def addclass():
     added = db_stuff.append_class(username,cl)
     return redirect('/classes')
 
+@app.route('/addassignments', methods=['POST'])
+def addassignments():
+    print request.form['due']
+    return redirect('/addwork')
+
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':
     #app.secret_key = os.urandom(32)
