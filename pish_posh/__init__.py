@@ -456,3 +456,15 @@ if __name__ == '__main__':
     #app.secret_key = os.urandom(32)
     app.debug = True #DANGER DANGER! Set to FALSE before deployment!
     app.run()
+
+#view assignments page
+@app.route("/va", methods=['POST'])
+def va():
+    if 'username' in session:
+        print "running..."
+        cid = request.form['cid']
+        print cid
+        db_stuff.work_from_cid(cid)
+        return redirect(url_for("homepage"))
+    else:
+        return redirect(url_for('student_login'))

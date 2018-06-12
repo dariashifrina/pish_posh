@@ -351,3 +351,9 @@ def add_work(cid, desc, type, month, date, year):
     print "Done"
 
 
+def work_from_cid(cid):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    q = "SELECT * FROM class_work WHERE CID = '" + cid + "'"
+    for i in q: 
+        print q
