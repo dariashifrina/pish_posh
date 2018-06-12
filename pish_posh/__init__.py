@@ -111,7 +111,7 @@ def class_page():
     if "username" in session:
         if session["account"] == "student":
             username = session["username"]
-            classes = db_stuff.get_classes_from_student(username)
+            classes = db_stuff.get_classes_and_teacher_from_student(username)
             print classes
             return render_template("classes.html", username = session["username"], classes=classes)
         else:

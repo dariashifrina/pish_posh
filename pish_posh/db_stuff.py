@@ -137,6 +137,22 @@ def get_classes_from_id(sid):
     db.close()
     return clist
 
+def get_teacher_from_id(sid):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    query = 'SELECT * FROM teachers WHERE TID = ?'
+    check = c.execute(query, (sid,))
+    print check
+    ret = None
+    try:
+        for q in check:
+            ret = q
+        clist = ret[2]  + " " + ret[3]
+    except:
+        clist = []
+    db.close()
+    return clist
+
 def get_class_from_cid(cid):
     db = sqlite3.connect(DB)
     c = db.cursor()
@@ -145,7 +161,7 @@ def get_class_from_cid(cid):
     ret = None
     for q in check:
         ret = q
-    clist = [ret[0], ret[1], ret[4]]
+    clist = [ret[0], ret[1], ret[4], ret[2]] #ID, name, desc, tid
     db.close()
     return clist
 
@@ -173,11 +189,24 @@ def update_classes(id, ncl):
 
 def get_classes_from_student(username):
     id = get_id_from_student(username)
-    print id
     clist = get_classes_from_id(id)
     lst = json.loads(clist)
     class_list = get_classes_from_list(lst)
     return class_list
+
+def get_classes_and_teacher_from_student(username):
+    id = get_id_from_student(username)
+    clist = get_classes_from_id(id)
+    lst = json.loads(clist)
+    class_list = get_classes_from_list(lst)
+    print class_list
+    return add_teachers_to_classes(class_list)
+
+def add_teachers_to_classes(lst):
+    copy=lst
+    for cl in copy:
+        cl.append(get_teacher_from_id(cl[3]))
+    return copy
 
 
 def auth(username, password):
@@ -219,7 +248,6 @@ def teacherauth(username, password):
     query = 'SELECT password FROM teachers WHERE username = ? AND password = ?'
     check = c.execute(query, (username, passs))
     ret = check.fetchone()
-    print ret
     db.close()
     return ret
 
@@ -264,9 +292,7 @@ def get_classes_from_teacher(username):
     db = sqlite3.connect(DB)
     c = db.cursor()
     tid = get_tid_from_teacher(username)
-    print tid
     query = "SELECT * FROM classes where TID = '" + str(tid) + "'"
-    print query
     classes = c.execute(query)
     ret = []
     for iter in classes:
