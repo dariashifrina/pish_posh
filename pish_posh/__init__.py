@@ -165,7 +165,7 @@ def adminhomepage():
             # stuid = db_stuff.get_id_from_student(username)
             # osis = db_stuff.get_osis_from_student(username)
             #email = name[0][0].lower() + name[1].lower() + "@stuy.edu"
-            return render_template("admin/home.html", username = session["username"])
+            return redirect(url_for("admin"))
         else:
             return redirect(url_for("logout"))
     return redirect(url_for("adminauth"))
