@@ -27,8 +27,8 @@ Classes
                          </div>
 
                      </div>
-                    <br height="1.5">
-                   <div class="subheading mb-3">{{ class[1] }}</div>
+                    <br>
+                   <div class="subheading">{{ class[1] }}</div>
 		 <!--  <div class="subheading mb-3">Students</div>
 		   {% for student in class[2] %}
 		   {{student[0]}},
@@ -42,8 +42,13 @@ Classes
 
    <form class="" action="/va2" method="POST">
 		     <input type="hidden" name="cid" value="{{class[3]}}">
-		     </input> <br>
-       <p><input type="submit" value="View Assignments"><br> </input>
+		     </input>
+       <input type="submit" value="View Assignments"><br> </input>
+     </form>
+     <form class="" action="/alterstudents" method="POST">
+         <input type="hidden" name="cid" value="{{class[3]}}">
+         </input>
+         <input type="submit" name="" value="Alter Students">
      </form>
       </div>
      </div>

@@ -158,7 +158,7 @@ def get_class_from_cid(cid):
     ret = None
     for q in check:
         ret = q
-    clist = [ret[0], ret[1], ret[4], ret[2]] #ID, name, desc, tid
+    clist = [ret[0], ret[1], ret[4], ret[2], ret[3]] #ID, name, desc, tid, slist
     db.close()
     return clist
 
@@ -198,6 +198,15 @@ def update_classes(id, ncl):
     c = db.cursor()
     comm = 'UPDATE student_info SET CList = ? WHERE SID = ?'
     c.execute(comm, (ncl, id))
+    db.commit()
+    db.close()
+
+def update_slist(cid, slist):
+    db = sqlite3.connect(DB)
+    c = db.cursor()
+    comm = 'UPDATE classes SET SList = ? WHERE CID = ?'
+    print comm
+    c.execute(comm, (slist, cid))
     db.commit()
     db.close()
 
@@ -373,3 +382,27 @@ def get_classes_for_calendar(student):
             alist.append(cl[1])
             ret.append(alist)
     return json.dumps(ret)
+
+def get_student_from_class(cid):
+    slist = get_class_from_cid(cid)[4]
+    return json.loads(slist)
+
+def remove_student_from_class(cid, student):
+    slist = json.loads(get_class_from_cid(cid)[4])
+    print slist
+    fixed = []
+    for entry in slist: #inneficcient but whatever
+        print [entry, student]
+        if entry != student:
+            fixed.append(entry)
+    fixed=json.dumps(fixed)
+    print fixed
+    update_slist(cid, fixed)
+    return fixed
+
+def add_student_to_class(cid, student):
+    slist = json.loads(get_class_from_cid(cid)[4])
+    slist.append(student)
+    nlist = json.dumps(slist)
+    update_slist(cid, nlist)
+    return slist

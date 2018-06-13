@@ -1,0 +1,43 @@
+{% extends "teachers/home2.html" %}
+{% block title %}
+Classes
+{% endblock %}
+
+{% block style %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<section class="resume-section p-3 p-lg-5 d-column" id="about">
+
+<table border="0" class="table table-bordered table-hover table-striped">
+    <thead>
+        <th><h3>Name</h3></th>
+        <th><h3>Remove?</h3></th>
+    </thead>
+    <tbody>
+        {% for student in students %}
+            <form class="" action="/modifystudents" method="post">
+                <input type="hidden" name="cid" value="{{ cid }}">
+                <input type="hidden" name="student" value="{{ student }}">
+                <input type="hidden" name="mod" value="remove">
+                <tr>
+                    <td>{{ student|e }}</td>
+                    <td> <input type="submit" name="" value="remove student"> </td>
+                </tr>
+            </form>
+
+        {% endfor %}
+
+    </tbody>
+</table>
+<form class="" action="/modifystudents" method="post">
+    Enter a student's ID or username:
+    <input type="text" name="student" value="">
+    <input type="hidden" name="mod" value="add">
+    <input type="hidden" name="cid" value="{{ cid }}">
+    <input type="submit" name="" value="add student">
+</form>
+{% endblock %}

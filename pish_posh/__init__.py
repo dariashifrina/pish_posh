@@ -497,6 +497,34 @@ def calendarhelp():
     else:
         return redirect(url_for('homepage'))
 
+@app.route('/alterstudents', methods=["GET", "POST"])
+def alterstudents():
+    if 'username' in session and session["account"] == 'teacher':
+        cid = request.form['cid']
+        slist = db_stuff.get_student_from_class(cid)
+        return render_template('teachers/alterstudents.html', students=slist, cid=cid)
+    else:
+        return redirect(url_for('homepage'))
+
+@app.route('/modifystudents', methods=["POST"])
+def modifystudents():
+    mod = request.form['mod']
+    cid = int(request.form['cid'])
+    if mod=="remove":
+        db_stuff.remove_student_from_class(cid,int(request.form['student']))
+    if mod == "add":
+        student = request.form['student']
+        id = -1
+        try:
+            id = int(student)
+        except:
+            id = int(db_stuff.get_id_from_student(student))
+        try:
+            db_stuff.add_student_to_class(cid, id)
+        except:
+            print 'nope'
+    return render_template('teachers/alterstudents.html', students=db_stuff.get_student_from_class(cid), cid=cid)
+
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':
     #app.secret_key = os.urandom(32)
