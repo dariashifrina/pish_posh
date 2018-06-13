@@ -451,21 +451,18 @@ def addclass():
     added = db_stuff.append_class(username,cl)
     return redirect('/classes')
 
-@app.route('/addassignments', methods=['POST'])
-def addassignments():
-    print request.form['due']
-    return redirect('/addwork')
-
 #view assignments page
-@app.route("/va", methods=["GET", "POST"])
+@app.route("/va", methods=["POST"])
+>>>>>>> 44fb06d34e8d66c953546d99fb84f991e964c88b
 def va():
     print 'please help me'
     if 'username' in session:
         print "running..."
         cid = request.form['cid']
         print cid
-        db_stuff.work_from_cid(cid)
-        return redirect(url_for("homepage"))
+        info = db_stuff.work_from_cid(cid)
+        print info
+        return render_template("va.html", info = info)
     else:
         return redirect(url_for('student_login'))
 

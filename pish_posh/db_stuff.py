@@ -350,5 +350,11 @@ def work_from_cid(cid):
     db = sqlite3.connect(DB)
     c = db.cursor()
     q = "SELECT * FROM class_work WHERE CID = '" + cid + "'"
-    for i in q:
-        print q
+    p = c.execute(q)
+    ret = []
+    for i in p:
+        add = []
+        for q in i:
+            add.append(q)
+        ret.append(add)
+    return ret
