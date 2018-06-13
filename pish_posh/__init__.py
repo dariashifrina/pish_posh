@@ -471,7 +471,7 @@ def va():
     else:
         return redirect(url_for('student_login'))
 
-@app.route('/calendarhelp')
+@app.route('/calendarhelp', methods=["GET", "POST"])
 def calendarhelp():
     if 'username' in session:
         username = session['username']

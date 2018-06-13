@@ -366,5 +366,5 @@ def get_classes_for_calendar(student):
         for assignment in worklst:
             alist = assignment#json.loads(assignment)
             alist.append(cl[1])
-            ret.append({alist[2]: alist})
-    return str(ret)
+            ret.append(alist)
+    return json.dumps(ret)
