@@ -15,7 +15,7 @@ DB = "pish.db"
 #    db.close()
 
 #################students DB FXNS#################################
-def add_student(name, lastname, username, password, osis, sid):
+def add_student(name, lastname, username, password, osis):
 #    user_tables()
     db = sqlite3.connect(DB)
     c = db.cursor()
@@ -24,8 +24,8 @@ def add_student(name, lastname, username, password, osis, sid):
     id = get_id('students','SID')
     if not check.fetchone():
         new_pass = hashlib.sha256(password).hexdigest()
-        c.execute('INSERT INTO students VALUES (?,?,?,?,?,?)', (name,lastname, username, new_pass, osis, sid))
-        c.execute('INSERT INTO student_info VALUES (?, ?)', (sid, '[]'))
+        c.execute('INSERT INTO students VALUES (?,?,?,?,?,?)', (name,lastname, username, new_pass, osis, id))
+        c.execute('INSERT INTO student_info VALUES (?, ?)', (id, '[]'))
         db.commit()
         db.close()
         return True
