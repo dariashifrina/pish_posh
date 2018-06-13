@@ -24,18 +24,18 @@ var updateEvents = function(assignments) {
                 d3.select(dates[i]).classed('tool', true).attr('title', type + ": " + assignments[j][3]).attr('data-placement', 'bottom');
                 if ((new Date(cdate))-(new Date) > 0) {
                     if (assignments[j][1] == 0) {
-                        d3.select(dates[i]).style("background-color", "red");
+                        d3.select(dates[i]).style("background-color", "#AED6F1");
                     }
                     else {
-                        d3.select(dates[i]).style("background-color", "blue");
+                        d3.select(dates[i]).style("background-color", "#3498DB");
                     }
                 }
                 else {
                     if (assignments[j][1] == 0) {
-                        d3.select(dates[i]).style("background-color", "green");
+                        d3.select(dates[i]).style("background-color", "#A3E4D7");
                     }
                     else {
-                        d3.select(dates[i]).style("background-color", "yellow");
+                        d3.select(dates[i]).style("background-color", "#1ABC9C");
                     }                }
             }
         }
