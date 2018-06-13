@@ -20,6 +20,8 @@ var updateEvents = function(assignments) {
             cdate = unixToISO(dates[i].getAttribute("data-timestamp"));
             adate = assignments[j][2]
             if (adate === cdate) {
+                var type = assignments[j][1] == 0 ? "Assignment" : "Test";
+                d3.select(dates[i]).classed('tool', true).attr('title', type + ": " + assignments[j][3]).attr('data-placement', 'bottom');
                 if ((new Date(cdate))-(new Date) > 0) {
                     if (assignments[j][1] == 0) {
                         d3.select(dates[i]).style("background-color", "red");
@@ -38,6 +40,7 @@ var updateEvents = function(assignments) {
             }
         }
     }
+    $('.tool').tooltip()
     return dates;
 }
 
@@ -60,4 +63,5 @@ var getAllAssignments = function() {
 
 $(document).ready(function() {
     getAllAssignments()
+    $('.tool').tooltip()
 });
