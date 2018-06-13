@@ -9,15 +9,30 @@ Classes
  
 {% block content %}
 <h2 class="mb-5">My Classes</h2>
-IN PROGRESS
-   <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">AP Computer Science</h3>
-              <div class="subheading mb-3">Mr. Brown</div>
-              <p><a href="#">View assignments</a><br>
-		<a href="#">Contact teacher</a></p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">Period 1</span>
-            </div>
+{% for class in classes %}
+        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+                 <div class="resume-content mr-auto">
+                   <h3 class="mb-0">{{ class[0] }}</h3>
+                   <div class="subheading mb-3">{{ class[1] }}</div>
+		 <!--  <div class="subheading mb-3">Students</div>
+		   {% for student in class[2] %}
+		   {{student[0]}},
+		   {% endfor %}
+
+            
+                 </div> 		
+                 <div class="resume-date text-md-right">
+                   <span class="text-primary">{{ class[2] }}</span>
+-->           
+
+   <form class="" action="/va2" method="POST">
+		     <input type="hidden" name="cid" value="{{class[3]}}">
+		     </input> <br>
+       <p><input type="submit" value="View Assignments"><br> </input>
+     </form>
+      </div>
+     </div>
+
+
+{% endfor %}
 {% endblock %}

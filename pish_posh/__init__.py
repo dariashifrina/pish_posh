@@ -149,7 +149,7 @@ def teacher_class_page():
         if session["account"] == "teacher":
             username = session["username"]
             classes = db_stuff.get_classinfo_from_teacher(username)
-            return render_template("teachers/teacherclasses.html", username = session["username"])
+            return render_template("teachers/teacherclasses.html", username = session["username"], classes = classes)
         else:
             return redirect(url_for("logout"))
     return redirect(url_for("teacherauth"))
@@ -471,6 +471,20 @@ def va():
         return render_template("va.html", info = info)
     else:
         return redirect(url_for('student_login'))
+
+#view assignments page
+@app.route("/va2", methods=["POST"])
+def va2():
+    print 'please help me'
+    if 'username' in session:
+        print "running..."
+        cid = request.form['cid']
+        print cid
+        info = db_stuff.work_from_cid(cid)
+        print info
+        return render_template("teachers/va2.html", info = info)
+    else:
+        return redirect(url_for('teacher_login'))
 
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':

@@ -313,24 +313,29 @@ def get_classes_from_teacher(username):
     return ret
 
 def get_classinfo_from_teacher(username):
+    final = []
     db = sqlite3.connect(DB)
     c = db.cursor()
     tid = get_tid_from_teacher(username)
     query = "SELECT * FROM classes WHERE TID = '" + str(tid) + "'"
     #classes = c.execute(query, (username))
     classes = c.execute(query).fetchall()
-    students2 = ast.literal_eval(classes[0][3])
-    students = []
-    for student in students2:
-        query2 = "SELECT username FROM students WHERE SID = '" + str(student) + "'"
-        students.append(c.execute(query2).fetchall())
-    name = classes[0][1]
-    description = classes[0][4]
-    info = []
-    info.append(name)
-    info.append(description)
-    info.append(students)
-    return info
+    for classs in classes:
+        students2 = ast.literal_eval(classs[3])
+        students = []
+        for student in students2:
+            query2 = "SELECT username FROM students WHERE SID = '" + str(student) + "'"
+            students.append(c.execute(query2).fetchall())
+        name = classs[1]
+        description = classs[4]
+        work = classs[0]
+        info = []
+        info.append(name)
+        info.append(description)
+        info.append(students)
+        info.append(work)
+        final.append(info)
+    return final
 
 print get_classes_from_teacher('tbm')
 
