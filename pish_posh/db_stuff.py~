@@ -337,7 +337,7 @@ def get_classinfo_from_teacher(username):
         final.append(info)
     return final
 
-#print get_classes_from_teacher('tbm')
+print get_classes_from_teacher('tbm')
 
 
 def add_work(cid, desc, type, date):

@@ -423,7 +423,7 @@ This entire section is just dealing with my lazily written admin code. Sorry who
 @app.route('/adminclass', methods=['POST'])
 def adminclass():
     print str(db_stuff.add_class(request.form['name'], request.form['tid'], request.form['slist'],  request.form['desc']))
-    return render_template('admin/admin.html')
+    return render_template('expression')
 
 @app.route('/teacherwork', methods=['GET', 'POST'])
 def teacherwork():
