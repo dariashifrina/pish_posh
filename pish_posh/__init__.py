@@ -429,8 +429,8 @@ def adminclass():
 def teacherwork():
     if 'username' in session:
         cid = request.form['chooseclass']
-        db_stuff.add_work(cid, request.form['wdescr'], request.form['type'], request.form['month'], request.form['day'], request.form['year'])
-        
+        date = request.form['due']
+        db_stuff.add_work(cid, request.form['wdescr'], request.form['type'], date)
         return redirect(url_for("teacherhomepage"))
     else:
         redirect(url_for("teacher_login"))
@@ -461,6 +461,7 @@ def addassignments():
 #view assignments page
 @app.route("/va", methods=["POST"])
 def va():
+    print 'please help me'
     if 'username' in session:
         print "running..."
         cid = request.form['cid']
@@ -470,8 +471,6 @@ def va():
         return render_template("va.html", info = info)
     else:
         return redirect(url_for('student_login'))
-
-
 
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':

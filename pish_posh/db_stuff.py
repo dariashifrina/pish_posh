@@ -335,17 +335,12 @@ def get_classinfo_from_teacher(username):
 print get_classes_from_teacher('tbm')
 
 
-def add_work(cid, desc, type, month, date, year):
+def add_work(cid, desc, type, date):
     cid = int(cid)
-    if int(date) < 10:
-        date = "0" + str(date)
-    if int(month) <10:
-        month = "0" + str(month)
-    db_date = str(date) + str(month) + str(year)
     db = sqlite3.connect(DB)
     c = db.cursor()
     query = 'INSERT INTO class_work VALUES (?,?,?,?)'
-    c.execute( query, (cid, type, db_date, desc))
+    c.execute( query, (cid, type, date, desc))
     db.commit()
     db.close()
     print "Done"
@@ -363,4 +358,3 @@ def work_from_cid(cid):
             add.append(q)
         ret.append(add)
     return ret
-        
