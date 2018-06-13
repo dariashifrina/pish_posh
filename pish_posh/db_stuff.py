@@ -364,5 +364,7 @@ def get_classes_for_calendar(student):
     for cl in clist:
         worklst = work_from_cid(str(cl[0]))
         for assignment in worklst:
-            ret.append({cl[1]: assignment})
-    return ret
+            alist = assignment#json.loads(assignment)
+            alist.append(cl[1])
+            ret.append({alist[2]: alist})
+    return str(ret)
