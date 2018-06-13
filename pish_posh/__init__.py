@@ -461,7 +461,6 @@ def addassignments():
 #view assignments page
 @app.route("/va", methods=["POST"])
 def va():
-    print 'please help me'
     if 'username' in session:
         print "running..."
         cid = request.form['cid']
@@ -471,6 +470,15 @@ def va():
         return render_template("va.html", info = info)
     else:
         return redirect(url_for('student_login'))
+
+@app.route('/calendarhelp')
+def calendarhelp():
+    if 'username' in session:
+        username = session['username']
+        classes = db_stuff.get_classes_for_calendar(username)
+        return str(classes)
+    else:
+        return redirect(url_for('homepage'))
 
 app.secret_key = os.urandom(32)
 if __name__ == '__main__':
