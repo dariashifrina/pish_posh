@@ -447,9 +447,12 @@ def addwork():
 @app.route('/addclass', methods=['GET', 'POST'])
 def addclass():
     username=session['username']
-    cl=int(request.form['class'])
-    added = db_stuff.append_class(username,cl)
-    return redirect('/classes')
+    try:
+        cl=int(request.form['class'])
+        added = db_stuff.append_class(username,cl)
+    except:
+        pass
+    return redirect('/homepage')
 
 
 @app.route('/addassignments', methods=['POST'])
