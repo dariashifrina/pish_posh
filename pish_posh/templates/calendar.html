@@ -137,14 +137,14 @@ Calendar
 const prev = document.querySelector('.demo-prev');
 const next = document.querySelector('.demo-next');
 </script>
-<p><strong>Today:</strong> </p>
+<!--<p><strong>Today:</strong> </p>
 <ul class="demo-today"><span>n/a</span></ul>
 
 <p><strong>Last Picked Day:</strong></p>
 <ul class="demo-last"><span>n/a</span></ul>
 
 <p><strong>Picked Days:</strong></p>
-<ul class="demo-picked"><span>n/a</span></ul>
+<ul class="demo-picked"><span>n/a</span></ul>-->
 <script>
 const today = document.querySelector('.demo-today');
 const picked = document.querySelector('.demo-picked');
@@ -160,7 +160,6 @@ function updateInfo() {
   if (this.today) {
     today.innerHTML = '';
     var li = document.createElement('li');
-    console.log(this.today);
     li.innerHTML = db(this.today);
     today.appendChild(li);
   }
@@ -200,9 +199,9 @@ const myCalendar = new HelloWeek({
       minDate: false,
       maxDate: false,
       nav: ["<img draggable='false' class='emoji' alt='◀' src='https://s.w.org/images/core/emoji/2.4/svg/25c0.svg'>", "<img draggable='false' class='emoji' alt='▶'src='https://s.w.org/images/core/emoji/2.4/svg/25b6.svg'>"],
-onLoad: updateInfo,
-onChange: updateInfo,
-onSelect: updateInfo
+onLoad: getAllAssignments,
+onChange: getAllAssignments,
+//onSelect: updateInfo
 });
 
 
