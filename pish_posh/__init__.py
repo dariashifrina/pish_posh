@@ -451,19 +451,12 @@ def addclass():
     added = db_stuff.append_class(username,cl)
     return redirect('/classes')
 
-<<<<<<< Updated upstream
+
 @app.route('/addassignments', methods=['POST'])
 def addassignments():
     print request.form['due']
     return redirect('/addwork')
 
-app.secret_key = os.urandom(32)
-if __name__ == '__main__':
-    #app.secret_key = os.urandom(32)
-    app.debug = True #DANGER DANGER! Set to FALSE before deployment!
-    app.run()
-=======
->>>>>>> Stashed changes
 
 #view assignments page
 @app.route("/va", methods=["POST"])
