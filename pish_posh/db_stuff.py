@@ -350,7 +350,6 @@ def add_work(cid, desc, type, date):
     db.close()
     print "Done"
 
-
 def work_from_cid(cid):
     db = sqlite3.connect(DB)
     c = db.cursor()
@@ -363,3 +362,14 @@ def work_from_cid(cid):
             add.append(q)
         ret.append(add)
     return ret
+
+def get_classes_for_calendar(student):
+    clist = get_classes_from_student(student)
+    ret = []
+    for cl in clist:
+        worklst = work_from_cid(str(cl[0]))
+        for assignment in worklst:
+            alist = assignment#json.loads(assignment)
+            alist.append(cl[1])
+            ret.append({alist[2]: alist})
+    return str(ret)
