@@ -17,9 +17,17 @@ Classes
 
 {% for class in classes %}
     <div>
-        <div class="resume-item d-flex flex-column flex-md-row mb-5">
+        <div class="resume-item flex-column flex-md-row mb-5">
                  <div class="resume-content mr-auto">
-                   <h3 class="mb-0">{{ class[0] }}</h3>
+                     <div class="" style="margin: auto">
+                         <div class="" style="margin: auto">
+                             <h3 class="mb-0" style="float: left; height: 10px">{{ class[0] }}</h3>
+                         <div class="resume-date text-md-right" style="float: right">
+                           <span class="text-primary">Class ID: {{ class[3] }}</span></div>
+                         </div>
+
+                     </div>
+                    <br height="1.5">
                    <div class="subheading mb-3">{{ class[1] }}</div>
 		 <!--  <div class="subheading mb-3">Students</div>
 		   {% for student in class[2] %}
